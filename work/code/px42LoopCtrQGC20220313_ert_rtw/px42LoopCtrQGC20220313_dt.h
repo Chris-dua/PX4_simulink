@@ -9,7 +9,7 @@
 //
 //  Model version              : 5.5
 //  Simulink Coder version : 9.7 (R2022a) 13-Nov-2021
-//  C++ source code generated on : Wed Mar 16 10:17:15 2022
+//  C++ source code generated on : Wed Mar 23 21:30:24 2022
 //
 //  Target selection: ert.tlc
 //  Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -40,12 +40,8 @@ static uint_T rtDataTypeSizes[] = {
   sizeof(uint64_T),
   sizeof(px4_Bus_actuator_outputs),
   sizeof(px4_Bus_vehicle_odometry),
-  sizeof(px4_Bus_input_rc),
-  sizeof(uint8_T),
-  sizeof(uint8_T),
   sizeof(px4_internal_block_PWM_px42Lo_T),
   sizeof(px4_internal_block_Subscriber_T),
-  sizeof(px4_internal_block_PX4SCIWrit_T),
   sizeof(uint64_T),
   sizeof(int64_T),
   sizeof(char_T),
@@ -74,12 +70,8 @@ static const char_T * rtDataTypeNames[] = {
   "uint64_T",
   "px4_Bus_actuator_outputs",
   "px4_Bus_vehicle_odometry",
-  "px4_Bus_input_rc",
-  "uint8_T",
-  "uint8_T",
   "px4_internal_block_PWM_px42Lo_T",
   "px4_internal_block_Subscriber_T",
-  "px4_internal_block_PX4SCIWrit_T",
   "uint64_T",
   "int64_T",
   "char_T",
@@ -93,22 +85,16 @@ static DataTypeTransition rtBTransitions[] = {
 
   { (char_T *)(&px42LoopCtrQGC20220313_B.In1_a), 17, 0, 1 },
 
-  { (char_T *)(&px42LoopCtrQGC20220313_B.In1_k), 19, 0, 1 },
-
   { (char_T *)(&px42LoopCtrQGC20220313_B.Gain2), 0, 0, 42 },
 
   { (char_T *)(&px42LoopCtrQGC20220313_B.output[0]), 1, 0, 16 },
 
-  { (char_T *)(&px42LoopCtrQGC20220313_B.values[0]), 5, 0, 18 },
-
-  { (char_T *)(&px42LoopCtrQGC20220313_B.Switch3), 8, 0, 3 }
+  { (char_T *)(&px42LoopCtrQGC20220313_B.NOT), 8, 0, 2 }
   ,
 
-  { (char_T *)(&px42LoopCtrQGC20220313_DW.obj), 22, 0, 1 },
+  { (char_T *)(&px42LoopCtrQGC20220313_DW.obj), 19, 0, 1 },
 
-  { (char_T *)(&px42LoopCtrQGC20220313_DW.obj_a), 23, 0, 3 },
-
-  { (char_T *)(&px42LoopCtrQGC20220313_DW.obj_e), 24, 0, 1 },
+  { (char_T *)(&px42LoopCtrQGC20220313_DW.obj_n), 20, 0, 2 },
 
   { (char_T *)(&px42LoopCtrQGC20220313_DW.UD_DSTATE), 0, 0, 38 },
 
@@ -116,14 +102,14 @@ static DataTypeTransition rtBTransitions[] = {
 
   { (char_T *)(&px42LoopCtrQGC20220313_DW.systemEnable), 6, 0, 1 },
 
-  { (char_T *)(&px42LoopCtrQGC20220313_DW.Subsystem1_SubsysRanBC), 2, 0, 10 },
+  { (char_T *)(&px42LoopCtrQGC20220313_DW.Subsystem1_SubsysRanBC), 2, 0, 9 },
 
   { (char_T *)(&px42LoopCtrQGC20220313_DW.attitude_flag), 8, 0, 2 }
 };
 
 // data type transition table for block I/O structure
 static DataTypeTransitionTable rtBTransTable = {
-  15U,
+  12U,
   rtBTransitions
 };
 
@@ -140,22 +126,16 @@ static DataTypeTransition rtPTransitions[] = {
 
   { (char_T *)(&px42LoopCtrQGC20220313_P.Constant_Value_c), 17, 0, 1 },
 
-  { (char_T *)(&px42LoopCtrQGC20220313_P.Out1_Y0_g), 19, 0, 1 },
+  { (char_T *)(&px42LoopCtrQGC20220313_P.Constant1_Value), 0, 0, 298 },
 
-  { (char_T *)(&px42LoopCtrQGC20220313_P.Constant_Value_i), 19, 0, 1 },
+  { (char_T *)(&px42LoopCtrQGC20220313_P.Reset_Value), 8, 0, 9 },
 
-  { (char_T *)(&px42LoopCtrQGC20220313_P.Constant1_Value), 0, 0, 299 },
-
-  { (char_T *)(&px42LoopCtrQGC20220313_P.Switch3_Threshold), 5, 0, 1 },
-
-  { (char_T *)(&px42LoopCtrQGC20220313_P.Constant10_Value), 8, 0, 10 },
-
-  { (char_T *)(&px42LoopCtrQGC20220313_P.Gain1_Gain_n), 20, 0, 4 }
+  { (char_T *)(&px42LoopCtrQGC20220313_P.ManualSwitch_CurrentSetting), 3, 0, 2 }
 };
 
 // data type transition table for Parameters structure
 static DataTypeTransitionTable rtPTransTable = {
-  11U,
+  8U,
   rtPTransitions
 };
 

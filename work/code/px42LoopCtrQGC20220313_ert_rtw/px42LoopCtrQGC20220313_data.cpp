@@ -9,7 +9,7 @@
 //
 // Model version                  : 5.5
 // Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
-// C/C++ source code generated on : Wed Mar 16 10:17:15 2022
+// C/C++ source code generated on : Wed Mar 23 21:30:24 2022
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -21,67 +21,67 @@
 // Block parameters (default storage)
 P_px42LoopCtrQGC20220313_T px42LoopCtrQGC20220313_P = {
   // Mask Parameter: DiscreteDerivative1_ICPrevScale
-  //  Referenced by: '<S34>/UD'
+  //  Referenced by: '<S33>/UD'
 
   0.0,
 
   // Mask Parameter: DiscreteDerivative1_ICPrevSca_o
-  //  Referenced by: '<S16>/UD'
+  //  Referenced by: '<S15>/UD'
 
   0.0,
 
   // Mask Parameter: DiscreteDerivative1_ICPrevSca_d
-  //  Referenced by: '<S25>/UD'
+  //  Referenced by: '<S24>/UD'
 
   0.0,
 
   // Mask Parameter: CompareToConstant1_const
-  //  Referenced by: '<S37>/Constant'
+  //  Referenced by: '<S36>/Constant'
 
   0.087266462599716474,
 
   // Mask Parameter: CompareToConstant1_const_b
-  //  Referenced by: '<S19>/Constant'
+  //  Referenced by: '<S18>/Constant'
 
   0.087266462599716474,
 
   // Mask Parameter: CompareToConstant1_const_h
-  //  Referenced by: '<S28>/Constant'
+  //  Referenced by: '<S27>/Constant'
 
   0.087266462599716474,
 
   // Mask Parameter: CompareToConstant2_const
-  //  Referenced by: '<S41>/Constant'
+  //  Referenced by: '<S40>/Constant'
 
   0.087266462599716474,
 
   // Mask Parameter: CompareToConstant1_const_hq
-  //  Referenced by: '<S40>/Constant'
+  //  Referenced by: '<S39>/Constant'
 
   4.8,
 
   // Mask Parameter: CompareToConstant2_const_o
-  //  Referenced by: '<S23>/Constant'
+  //  Referenced by: '<S22>/Constant'
 
   0.087266462599716474,
 
   // Mask Parameter: CompareToConstant1_const_p
-  //  Referenced by: '<S22>/Constant'
+  //  Referenced by: '<S21>/Constant'
 
   4.6,
 
   // Mask Parameter: CompareToConstant2_const_a
-  //  Referenced by: '<S32>/Constant'
+  //  Referenced by: '<S31>/Constant'
 
   0.087266462599716474,
 
   // Mask Parameter: CompareToConstant1_const_a
-  //  Referenced by: '<S31>/Constant'
+  //  Referenced by: '<S30>/Constant'
 
   4.6,
 
   // Computed Parameter: Out1_Y0
-  //  Referenced by: '<S44>/Out1'
+  //  Referenced by: '<S43>/Out1'
 
   {
     (0ULL),                            // timestamp
@@ -159,7 +159,7 @@ P_px42LoopCtrQGC20220313_T px42LoopCtrQGC20220313_P = {
   },
 
   // Computed Parameter: Out1_Y0_k
-  //  Referenced by: '<S43>/Out1'
+  //  Referenced by: '<S42>/Out1'
 
   {
     (0ULL),                            // timestamp
@@ -192,53 +192,10 @@ P_px42LoopCtrQGC20220313_T px42LoopCtrQGC20220313_P = {
     // _padding0
   },
 
-  // Computed Parameter: Out1_Y0_g
-  //  Referenced by: '<S54>/Out1'
+  // Expression: 0
+  //  Referenced by: '<S9>/Constant1'
 
-  {
-    (0ULL),                            // timestamp
-    (0ULL),                            // timestamp_last_signal
-    0U,                                // channel_count
-    0,                                 // rssi
-    0U,                                // rc_lost_frame_count
-    0U,                                // rc_total_frame_count
-    0U,                                // rc_ppm_frame_length
-
-    {
-      0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U }
-    ,                                  // values
-    false,                             // rc_failsafe
-    false,                             // rc_lost
-    0U,                                // input_source
-
-    {
-      0U, 0U, 0U }
-    // _padding0
-  },
-
-  // Computed Parameter: Constant_Value_i
-  //  Referenced by: '<S53>/Constant'
-
-  {
-    (0ULL),                            // timestamp
-    (0ULL),                            // timestamp_last_signal
-    0U,                                // channel_count
-    0,                                 // rssi
-    0U,                                // rc_lost_frame_count
-    0U,                                // rc_total_frame_count
-    0U,                                // rc_ppm_frame_length
-
-    {
-      0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U }
-    ,                                  // values
-    false,                             // rc_failsafe
-    false,                             // rc_lost
-    0U,                                // input_source
-
-    {
-      0U, 0U, 0U }
-    // _padding0
-  },
+  0.0,
 
   // Expression: 0
   //  Referenced by: '<S10>/Constant1'
@@ -247,11 +204,6 @@ P_px42LoopCtrQGC20220313_T px42LoopCtrQGC20220313_P = {
 
   // Expression: 0
   //  Referenced by: '<S11>/Constant1'
-
-  0.0,
-
-  // Expression: 0
-  //  Referenced by: '<S12>/Constant1'
 
   0.0,
 
@@ -271,6 +223,11 @@ P_px42LoopCtrQGC20220313_T px42LoopCtrQGC20220313_P = {
   0.0,
 
   // Expression: 0
+  //  Referenced by: '<S12>/Constant3'
+
+  0.0,
+
+  // Expression: 0
   //  Referenced by: '<S13>/Constant3'
 
   0.0,
@@ -280,33 +237,28 @@ P_px42LoopCtrQGC20220313_T px42LoopCtrQGC20220313_P = {
 
   0.0,
 
-  // Expression: 0
-  //  Referenced by: '<S15>/Constant3'
+  // Expression: 1
+  //  Referenced by: '<S47>/Constant'
 
-  0.0,
+  1.0,
 
   // Expression: 1
   //  Referenced by: '<S48>/Constant'
 
   1.0,
 
-  // Expression: 1
-  //  Referenced by: '<S49>/Constant'
-
-  1.0,
-
   // Computed Parameter: DiscreteTimeIntegrator_gainval
-  //  Referenced by: '<S6>/Discrete-Time Integrator'
+  //  Referenced by: '<S5>/Discrete-Time Integrator'
 
   0.005,
 
   // Expression: 0
-  //  Referenced by: '<S6>/Discrete-Time Integrator'
+  //  Referenced by: '<S5>/Discrete-Time Integrator'
 
   0.0,
 
   // Expression: 1
-  //  Referenced by: '<S6>/Constant9'
+  //  Referenced by: '<S5>/Constant9'
 
   1.0,
 
@@ -346,62 +298,62 @@ P_px42LoopCtrQGC20220313_T px42LoopCtrQGC20220313_P = {
   0.0,
 
   // Expression: 8.00109649122807
-  //  Referenced by: '<S36>/r'
+  //  Referenced by: '<S35>/r'
 
   8.00109649122807,
 
   // Expression: 2
-  //  Referenced by: '<S36>/ch'
+  //  Referenced by: '<S35>/ch'
 
   2.0,
 
   // Expression: 5
-  //  Referenced by: '<S36>/T'
+  //  Referenced by: '<S35>/T'
 
   5.0,
 
   // Expression: 0
-  //  Referenced by: '<S36>/t'
+  //  Referenced by: '<S35>/t'
 
   0.0,
 
   // Expression: 2.036184210526316
-  //  Referenced by: '<S12>/b'
+  //  Referenced by: '<S11>/b'
 
   2.0361842105263159,
 
   // Expression: -1
-  //  Referenced by: '<S35>/Gain4'
+  //  Referenced by: '<S34>/Gain4'
 
   -1.0,
 
   // Computed Parameter: TSamp_WtEt
-  //  Referenced by: '<S34>/TSamp'
+  //  Referenced by: '<S33>/TSamp'
 
   200.0,
 
   // Expression: 0.5282118055555556
-  //  Referenced by: '<S12>/l'
+  //  Referenced by: '<S11>/l'
 
   0.52821180555555558,
 
   // Expression: 0.01/0.0052
-  //  Referenced by: '<S12>/Gain'
+  //  Referenced by: '<S11>/Gain'
 
   1.9230769230769231,
 
   // Expression: 0.00502
-  //  Referenced by: '<S12>/Gain1'
+  //  Referenced by: '<S11>/Gain1'
 
   0.00502,
 
   // Computed Parameter: DiscreteTimeIntegrator3_gainval
-  //  Referenced by: '<S15>/Discrete-Time Integrator3'
+  //  Referenced by: '<S14>/Discrete-Time Integrator3'
 
   0.005,
 
   // Expression: 0
-  //  Referenced by: '<S15>/Discrete-Time Integrator3'
+  //  Referenced by: '<S14>/Discrete-Time Integrator3'
 
   0.0,
 
@@ -456,62 +408,62 @@ P_px42LoopCtrQGC20220313_T px42LoopCtrQGC20220313_P = {
   0.99999506520185821,
 
   // Expression: 6.033653846153846
-  //  Referenced by: '<S18>/r'
+  //  Referenced by: '<S17>/r'
 
   6.0336538461538458,
 
   // Expression: 2
-  //  Referenced by: '<S18>/ch'
+  //  Referenced by: '<S17>/ch'
 
   2.0,
 
   // Expression: 5.018640350877193
-  //  Referenced by: '<S18>/T'
+  //  Referenced by: '<S17>/T'
 
   5.0186403508771926,
 
   // Expression: 0
-  //  Referenced by: '<S18>/t'
+  //  Referenced by: '<S17>/t'
 
   0.0,
 
   // Expression: 2.470900809716599
-  //  Referenced by: '<S10>/b'
+  //  Referenced by: '<S9>/b'
 
   2.470900809716599,
 
   // Expression: -1
-  //  Referenced by: '<S17>/Gain4'
+  //  Referenced by: '<S16>/Gain4'
 
   -1.0,
 
   // Computed Parameter: TSamp_WtEt_p
-  //  Referenced by: '<S16>/TSamp'
+  //  Referenced by: '<S15>/TSamp'
 
   200.0,
 
   // Expression: 0.5282118055555556
-  //  Referenced by: '<S10>/l'
+  //  Referenced by: '<S9>/l'
 
   0.52821180555555558,
 
   // Expression: 0.01/0.0052
-  //  Referenced by: '<S10>/Gain'
+  //  Referenced by: '<S9>/Gain'
 
   1.9230769230769231,
 
   // Expression: 0.00502
-  //  Referenced by: '<S10>/Gain1'
+  //  Referenced by: '<S9>/Gain1'
 
   0.00502,
 
   // Computed Parameter: DiscreteTimeIntegrator3_gainv_m
-  //  Referenced by: '<S13>/Discrete-Time Integrator3'
+  //  Referenced by: '<S12>/Discrete-Time Integrator3'
 
   0.005,
 
   // Expression: 0
-  //  Referenced by: '<S13>/Discrete-Time Integrator3'
+  //  Referenced by: '<S12>/Discrete-Time Integrator3'
 
   0.0,
 
@@ -521,62 +473,62 @@ P_px42LoopCtrQGC20220313_T px42LoopCtrQGC20220313_P = {
   0.00478,
 
   // Expression: 6.001388888888889
-  //  Referenced by: '<S27>/r'
+  //  Referenced by: '<S26>/r'
 
   6.0013888888888891,
 
   // Expression: 2
-  //  Referenced by: '<S27>/ch'
+  //  Referenced by: '<S26>/ch'
 
   2.0,
 
   // Expression: 5
-  //  Referenced by: '<S27>/T'
+  //  Referenced by: '<S26>/T'
 
   5.0,
 
   // Expression: 0
-  //  Referenced by: '<S27>/t'
+  //  Referenced by: '<S26>/t'
 
   0.0,
 
   // Expression: 2.490277777777778
-  //  Referenced by: '<S11>/b'
+  //  Referenced by: '<S10>/b'
 
   2.490277777777778,
 
   // Expression: -1
-  //  Referenced by: '<S26>/Gain4'
+  //  Referenced by: '<S25>/Gain4'
 
   -1.0,
 
   // Computed Parameter: TSamp_WtEt_o
-  //  Referenced by: '<S25>/TSamp'
+  //  Referenced by: '<S24>/TSamp'
 
   200.0,
 
   // Expression: 0.5340277777777778
-  //  Referenced by: '<S11>/l'
+  //  Referenced by: '<S10>/l'
 
   0.53402777777777777,
 
   // Expression: 0.01/0.0052
-  //  Referenced by: '<S11>/Gain'
+  //  Referenced by: '<S10>/Gain'
 
   1.9230769230769231,
 
   // Expression: 0.00478
-  //  Referenced by: '<S11>/J'
+  //  Referenced by: '<S10>/J'
 
   0.00478,
 
   // Computed Parameter: DiscreteTimeIntegrator3_gainv_e
-  //  Referenced by: '<S14>/Discrete-Time Integrator3'
+  //  Referenced by: '<S13>/Discrete-Time Integrator3'
 
   0.005,
 
   // Expression: 0
-  //  Referenced by: '<S14>/Discrete-Time Integrator3'
+  //  Referenced by: '<S13>/Discrete-Time Integrator3'
 
   0.0,
 
@@ -586,581 +538,21 @@ P_px42LoopCtrQGC20220313_T px42LoopCtrQGC20220313_P = {
   0.00478,
 
   // Expression: 0
-  //  Referenced by: '<S36>/Data Store Memory'
+  //  Referenced by: '<S35>/Data Store Memory'
 
   0.0,
 
   // Expression: 0
-  //  Referenced by: '<S18>/Data Store Memory'
+  //  Referenced by: '<S17>/Data Store Memory'
 
   0.0,
 
   // Expression: 0
-  //  Referenced by: '<S27>/Data Store Memory'
+  //  Referenced by: '<S26>/Data Store Memory'
 
   0.0,
 
   // Computed Parameter: DiscreteTimeIntegrator_gainva_n
-  //  Referenced by: '<S15>/Discrete-Time Integrator'
-
-  0.005,
-
-  // Expression: 0
-  //  Referenced by: '<S15>/Discrete-Time Integrator'
-
-  0.0,
-
-  // Expression: 180/pi
-  //  Referenced by: '<S15>/Gain2'
-
-  57.295779513082323,
-
-  // Expression: 1/0.008
-  //  Referenced by: '<S15>/1//J'
-
-  125.0,
-
-  // Expression: 0.01/0.008
-  //  Referenced by: '<S15>/k//J'
-
-  1.25,
-
-  // Expression: 1
-  //  Referenced by: '<S15>/Saturation'
-
-  1.0,
-
-  // Expression: -1
-  //  Referenced by: '<S15>/Saturation'
-
-  -1.0,
-
-  // Expression: 0
-  //  Referenced by: '<S15>/l1'
-
-  0.0,
-
-  // Expression: 0
-  //  Referenced by: '<S15>/lambda1'
-
-  0.0,
-
-  // Computed Parameter: DiscreteTimeIntegrator1_gainval
-  //  Referenced by: '<S15>/Discrete-Time Integrator1'
-
-  0.005,
-
-  // Expression: 0
-  //  Referenced by: '<S15>/Discrete-Time Integrator1'
-
-  0.0,
-
-  // Expression: 0.1
-  //  Referenced by: '<S15>/Constant1'
-
-  0.1,
-
-  // Expression: 1
-  //  Referenced by: '<S15>/Saturation10'
-
-  1.0,
-
-  // Expression: -1
-  //  Referenced by: '<S15>/Saturation10'
-
-  -1.0,
-
-  // Expression: 1
-  //  Referenced by: '<S15>/Saturation11'
-
-  1.0,
-
-  // Expression: -1
-  //  Referenced by: '<S15>/Saturation11'
-
-  -1.0,
-
-  // Expression: 0.5
-  //  Referenced by: '<S15>/Gain'
-
-  0.5,
-
-  // Expression: 1
-  //  Referenced by: '<S15>/Saturation8'
-
-  1.0,
-
-  // Expression: -1
-  //  Referenced by: '<S15>/Saturation8'
-
-  -1.0,
-
-  // Expression: 1
-  //  Referenced by: '<S15>/Constant2'
-
-  1.0,
-
-  // Expression: 30
-  //  Referenced by: '<S15>/Gain5'
-
-  30.0,
-
-  // Expression: 1
-  //  Referenced by: '<S15>/Saturation13'
-
-  1.0,
-
-  // Expression: -1
-  //  Referenced by: '<S15>/Saturation13'
-
-  -1.0,
-
-  // Expression: 1
-  //  Referenced by: '<S15>/Saturation9'
-
-  1.0,
-
-  // Expression: -1
-  //  Referenced by: '<S15>/Saturation9'
-
-  -1.0,
-
-  // Expression: 0.5
-  //  Referenced by: '<S15>/Gain1'
-
-  0.5,
-
-  // Expression: 1
-  //  Referenced by: '<S15>/Constant4'
-
-  1.0,
-
-  // Expression: 1
-  //  Referenced by: '<S15>/Saturation12'
-
-  1.0,
-
-  // Expression: -1
-  //  Referenced by: '<S15>/Saturation12'
-
-  -1.0,
-
-  // Expression: 1
-  //  Referenced by: '<S15>/Saturation16'
-
-  1.0,
-
-  // Expression: -1
-  //  Referenced by: '<S15>/Saturation16'
-
-  -1.0,
-
-  // Expression: 1
-  //  Referenced by: '<S15>/Saturation14'
-
-  1.0,
-
-  // Expression: -1
-  //  Referenced by: '<S15>/Saturation14'
-
-  -1.0,
-
-  // Expression: 0.5
-  //  Referenced by: '<S15>/Gain3'
-
-  0.5,
-
-  // Expression: 1
-  //  Referenced by: '<S15>/Constant6'
-
-  1.0,
-
-  // Expression: 0
-  //  Referenced by: '<S15>/lambda2'
-
-  0.0,
-
-  // Expression: 1
-  //  Referenced by: '<S15>/Saturation1'
-
-  1.0,
-
-  // Expression: -1
-  //  Referenced by: '<S15>/Saturation1'
-
-  -1.0,
-
-  // Expression: 0
-  //  Referenced by: '<S15>/l2'
-
-  0.0,
-
-  // Expression: 1
-  //  Referenced by: '<S15>/Saturation15'
-
-  1.0,
-
-  // Expression: -1
-  //  Referenced by: '<S15>/Saturation15'
-
-  -1.0,
-
-  // Expression: 30
-  //  Referenced by: '<S15>/Gain6'
-
-  30.0,
-
-  // Expression: 1
-  //  Referenced by: '<S15>/Saturation19'
-
-  1.0,
-
-  // Expression: -1
-  //  Referenced by: '<S15>/Saturation19'
-
-  -1.0,
-
-  // Expression: 1
-  //  Referenced by: '<S15>/Saturation17'
-
-  1.0,
-
-  // Expression: -1
-  //  Referenced by: '<S15>/Saturation17'
-
-  -1.0,
-
-  // Expression: 0.5
-  //  Referenced by: '<S15>/Gain4'
-
-  0.5,
-
-  // Expression: 1
-  //  Referenced by: '<S15>/Constant8'
-
-  1.0,
-
-  // Expression: 1
-  //  Referenced by: '<S15>/Saturation18'
-
-  1.0,
-
-  // Expression: -1
-  //  Referenced by: '<S15>/Saturation18'
-
-  -1.0,
-
-  // Expression: 1
-  //  Referenced by: '<S15>/Saturation3'
-
-  1.0,
-
-  // Expression: -1
-  //  Referenced by: '<S15>/Saturation3'
-
-  -1.0,
-
-  // Expression: 0
-  //  Referenced by: '<S15>/l4'
-
-  0.0,
-
-  // Expression: 0
-  //  Referenced by: '<S15>/lambda4'
-
-  0.0,
-
-  // Expression: 40
-  //  Referenced by: '<S15>/Gain7'
-
-  40.0,
-
-  // Expression: 1
-  //  Referenced by: '<S15>/Gain8'
-
-  1.0,
-
-  // Computed Parameter: DiscreteTimeIntegrator_gainva_e
-  //  Referenced by: '<S13>/Discrete-Time Integrator'
-
-  0.005,
-
-  // Expression: 0
-  //  Referenced by: '<S13>/Discrete-Time Integrator'
-
-  0.0,
-
-  // Expression: 180/pi
-  //  Referenced by: '<S13>/Gain2'
-
-  57.295779513082323,
-
-  // Expression: 1/0.00478
-  //  Referenced by: '<S13>/1//J'
-
-  209.20502092050208,
-
-  // Expression: 0.01/0.00478
-  //  Referenced by: '<S13>/k//J'
-
-  2.0920502092050208,
-
-  // Expression: 1
-  //  Referenced by: '<S13>/Saturation'
-
-  1.0,
-
-  // Expression: -1
-  //  Referenced by: '<S13>/Saturation'
-
-  -1.0,
-
-  // Expression: 0
-  //  Referenced by: '<S13>/l1'
-
-  0.0,
-
-  // Expression: 0
-  //  Referenced by: '<S13>/lambda1'
-
-  0.0,
-
-  // Computed Parameter: DiscreteTimeIntegrator1_gainv_n
-  //  Referenced by: '<S13>/Discrete-Time Integrator1'
-
-  0.005,
-
-  // Expression: 0
-  //  Referenced by: '<S13>/Discrete-Time Integrator1'
-
-  0.0,
-
-  // Expression: 0.1
-  //  Referenced by: '<S13>/Constant1'
-
-  0.1,
-
-  // Expression: 1
-  //  Referenced by: '<S13>/Saturation10'
-
-  1.0,
-
-  // Expression: -1
-  //  Referenced by: '<S13>/Saturation10'
-
-  -1.0,
-
-  // Expression: 1
-  //  Referenced by: '<S13>/Saturation11'
-
-  1.0,
-
-  // Expression: -1
-  //  Referenced by: '<S13>/Saturation11'
-
-  -1.0,
-
-  // Expression: 0.5
-  //  Referenced by: '<S13>/Gain'
-
-  0.5,
-
-  // Expression: 1
-  //  Referenced by: '<S13>/Saturation8'
-
-  1.0,
-
-  // Expression: -1
-  //  Referenced by: '<S13>/Saturation8'
-
-  -1.0,
-
-  // Expression: 1
-  //  Referenced by: '<S13>/Constant2'
-
-  1.0,
-
-  // Expression: 30
-  //  Referenced by: '<S13>/Gain5'
-
-  30.0,
-
-  // Expression: 1
-  //  Referenced by: '<S13>/Saturation13'
-
-  1.0,
-
-  // Expression: -1
-  //  Referenced by: '<S13>/Saturation13'
-
-  -1.0,
-
-  // Expression: 1
-  //  Referenced by: '<S13>/Saturation9'
-
-  1.0,
-
-  // Expression: -1
-  //  Referenced by: '<S13>/Saturation9'
-
-  -1.0,
-
-  // Expression: 0.5
-  //  Referenced by: '<S13>/Gain1'
-
-  0.5,
-
-  // Expression: 1
-  //  Referenced by: '<S13>/Constant4'
-
-  1.0,
-
-  // Expression: 1
-  //  Referenced by: '<S13>/Saturation12'
-
-  1.0,
-
-  // Expression: -1
-  //  Referenced by: '<S13>/Saturation12'
-
-  -1.0,
-
-  // Expression: 1
-  //  Referenced by: '<S13>/Saturation16'
-
-  1.0,
-
-  // Expression: -1
-  //  Referenced by: '<S13>/Saturation16'
-
-  -1.0,
-
-  // Expression: 1
-  //  Referenced by: '<S13>/Saturation14'
-
-  1.0,
-
-  // Expression: -1
-  //  Referenced by: '<S13>/Saturation14'
-
-  -1.0,
-
-  // Expression: 0.5
-  //  Referenced by: '<S13>/Gain3'
-
-  0.5,
-
-  // Expression: 1
-  //  Referenced by: '<S13>/Constant6'
-
-  1.0,
-
-  // Expression: 0
-  //  Referenced by: '<S13>/lambda2'
-
-  0.0,
-
-  // Expression: 1
-  //  Referenced by: '<S13>/Saturation1'
-
-  1.0,
-
-  // Expression: -1
-  //  Referenced by: '<S13>/Saturation1'
-
-  -1.0,
-
-  // Expression: 0
-  //  Referenced by: '<S13>/l2'
-
-  0.0,
-
-  // Expression: 1
-  //  Referenced by: '<S13>/Saturation15'
-
-  1.0,
-
-  // Expression: -1
-  //  Referenced by: '<S13>/Saturation15'
-
-  -1.0,
-
-  // Expression: 30
-  //  Referenced by: '<S13>/Gain6'
-
-  30.0,
-
-  // Expression: 1
-  //  Referenced by: '<S13>/Saturation19'
-
-  1.0,
-
-  // Expression: -1
-  //  Referenced by: '<S13>/Saturation19'
-
-  -1.0,
-
-  // Expression: 1
-  //  Referenced by: '<S13>/Saturation17'
-
-  1.0,
-
-  // Expression: -1
-  //  Referenced by: '<S13>/Saturation17'
-
-  -1.0,
-
-  // Expression: 0.5
-  //  Referenced by: '<S13>/Gain4'
-
-  0.5,
-
-  // Expression: 1
-  //  Referenced by: '<S13>/Constant8'
-
-  1.0,
-
-  // Expression: 1
-  //  Referenced by: '<S13>/Saturation18'
-
-  1.0,
-
-  // Expression: -1
-  //  Referenced by: '<S13>/Saturation18'
-
-  -1.0,
-
-  // Expression: 1
-  //  Referenced by: '<S13>/Saturation3'
-
-  1.0,
-
-  // Expression: -1
-  //  Referenced by: '<S13>/Saturation3'
-
-  -1.0,
-
-  // Expression: 0
-  //  Referenced by: '<S13>/l4'
-
-  0.0,
-
-  // Expression: 0
-  //  Referenced by: '<S13>/lambda4'
-
-  0.0,
-
-  // Expression: 40
-  //  Referenced by: '<S13>/Gain7'
-
-  40.0,
-
-  // Expression: 1
-  //  Referenced by: '<S13>/Gain8'
-
-  1.0,
-
-  // Computed Parameter: DiscreteTimeIntegrator_gainv_nv
   //  Referenced by: '<S14>/Discrete-Time Integrator'
 
   0.005,
@@ -1175,15 +567,15 @@ P_px42LoopCtrQGC20220313_T px42LoopCtrQGC20220313_P = {
 
   57.295779513082323,
 
-  // Expression: 1/0.00478
+  // Expression: 1/0.008
   //  Referenced by: '<S14>/1//J'
 
-  209.20502092050208,
+  125.0,
 
-  // Expression: 0.01/0.00478
+  // Expression: 0.01/0.008
   //  Referenced by: '<S14>/k//J'
 
-  2.0920502092050208,
+  1.25,
 
   // Expression: 1
   //  Referenced by: '<S14>/Saturation'
@@ -1205,7 +597,7 @@ P_px42LoopCtrQGC20220313_T px42LoopCtrQGC20220313_P = {
 
   0.0,
 
-  // Computed Parameter: DiscreteTimeIntegrator1_gainv_g
+  // Computed Parameter: DiscreteTimeIntegrator1_gainval
   //  Referenced by: '<S14>/Discrete-Time Integrator1'
 
   0.005,
@@ -1440,6 +832,566 @@ P_px42LoopCtrQGC20220313_T px42LoopCtrQGC20220313_P = {
 
   1.0,
 
+  // Computed Parameter: DiscreteTimeIntegrator_gainva_e
+  //  Referenced by: '<S12>/Discrete-Time Integrator'
+
+  0.005,
+
+  // Expression: 0
+  //  Referenced by: '<S12>/Discrete-Time Integrator'
+
+  0.0,
+
+  // Expression: 180/pi
+  //  Referenced by: '<S12>/Gain2'
+
+  57.295779513082323,
+
+  // Expression: 1/0.00478
+  //  Referenced by: '<S12>/1//J'
+
+  209.20502092050208,
+
+  // Expression: 0.01/0.00478
+  //  Referenced by: '<S12>/k//J'
+
+  2.0920502092050208,
+
+  // Expression: 1
+  //  Referenced by: '<S12>/Saturation'
+
+  1.0,
+
+  // Expression: -1
+  //  Referenced by: '<S12>/Saturation'
+
+  -1.0,
+
+  // Expression: 0
+  //  Referenced by: '<S12>/l1'
+
+  0.0,
+
+  // Expression: 0
+  //  Referenced by: '<S12>/lambda1'
+
+  0.0,
+
+  // Computed Parameter: DiscreteTimeIntegrator1_gainv_n
+  //  Referenced by: '<S12>/Discrete-Time Integrator1'
+
+  0.005,
+
+  // Expression: 0
+  //  Referenced by: '<S12>/Discrete-Time Integrator1'
+
+  0.0,
+
+  // Expression: 0.1
+  //  Referenced by: '<S12>/Constant1'
+
+  0.1,
+
+  // Expression: 1
+  //  Referenced by: '<S12>/Saturation10'
+
+  1.0,
+
+  // Expression: -1
+  //  Referenced by: '<S12>/Saturation10'
+
+  -1.0,
+
+  // Expression: 1
+  //  Referenced by: '<S12>/Saturation11'
+
+  1.0,
+
+  // Expression: -1
+  //  Referenced by: '<S12>/Saturation11'
+
+  -1.0,
+
+  // Expression: 0.5
+  //  Referenced by: '<S12>/Gain'
+
+  0.5,
+
+  // Expression: 1
+  //  Referenced by: '<S12>/Saturation8'
+
+  1.0,
+
+  // Expression: -1
+  //  Referenced by: '<S12>/Saturation8'
+
+  -1.0,
+
+  // Expression: 1
+  //  Referenced by: '<S12>/Constant2'
+
+  1.0,
+
+  // Expression: 30
+  //  Referenced by: '<S12>/Gain5'
+
+  30.0,
+
+  // Expression: 1
+  //  Referenced by: '<S12>/Saturation13'
+
+  1.0,
+
+  // Expression: -1
+  //  Referenced by: '<S12>/Saturation13'
+
+  -1.0,
+
+  // Expression: 1
+  //  Referenced by: '<S12>/Saturation9'
+
+  1.0,
+
+  // Expression: -1
+  //  Referenced by: '<S12>/Saturation9'
+
+  -1.0,
+
+  // Expression: 0.5
+  //  Referenced by: '<S12>/Gain1'
+
+  0.5,
+
+  // Expression: 1
+  //  Referenced by: '<S12>/Constant4'
+
+  1.0,
+
+  // Expression: 1
+  //  Referenced by: '<S12>/Saturation12'
+
+  1.0,
+
+  // Expression: -1
+  //  Referenced by: '<S12>/Saturation12'
+
+  -1.0,
+
+  // Expression: 1
+  //  Referenced by: '<S12>/Saturation16'
+
+  1.0,
+
+  // Expression: -1
+  //  Referenced by: '<S12>/Saturation16'
+
+  -1.0,
+
+  // Expression: 1
+  //  Referenced by: '<S12>/Saturation14'
+
+  1.0,
+
+  // Expression: -1
+  //  Referenced by: '<S12>/Saturation14'
+
+  -1.0,
+
+  // Expression: 0.5
+  //  Referenced by: '<S12>/Gain3'
+
+  0.5,
+
+  // Expression: 1
+  //  Referenced by: '<S12>/Constant6'
+
+  1.0,
+
+  // Expression: 0
+  //  Referenced by: '<S12>/lambda2'
+
+  0.0,
+
+  // Expression: 1
+  //  Referenced by: '<S12>/Saturation1'
+
+  1.0,
+
+  // Expression: -1
+  //  Referenced by: '<S12>/Saturation1'
+
+  -1.0,
+
+  // Expression: 0
+  //  Referenced by: '<S12>/l2'
+
+  0.0,
+
+  // Expression: 1
+  //  Referenced by: '<S12>/Saturation15'
+
+  1.0,
+
+  // Expression: -1
+  //  Referenced by: '<S12>/Saturation15'
+
+  -1.0,
+
+  // Expression: 30
+  //  Referenced by: '<S12>/Gain6'
+
+  30.0,
+
+  // Expression: 1
+  //  Referenced by: '<S12>/Saturation19'
+
+  1.0,
+
+  // Expression: -1
+  //  Referenced by: '<S12>/Saturation19'
+
+  -1.0,
+
+  // Expression: 1
+  //  Referenced by: '<S12>/Saturation17'
+
+  1.0,
+
+  // Expression: -1
+  //  Referenced by: '<S12>/Saturation17'
+
+  -1.0,
+
+  // Expression: 0.5
+  //  Referenced by: '<S12>/Gain4'
+
+  0.5,
+
+  // Expression: 1
+  //  Referenced by: '<S12>/Constant8'
+
+  1.0,
+
+  // Expression: 1
+  //  Referenced by: '<S12>/Saturation18'
+
+  1.0,
+
+  // Expression: -1
+  //  Referenced by: '<S12>/Saturation18'
+
+  -1.0,
+
+  // Expression: 1
+  //  Referenced by: '<S12>/Saturation3'
+
+  1.0,
+
+  // Expression: -1
+  //  Referenced by: '<S12>/Saturation3'
+
+  -1.0,
+
+  // Expression: 0
+  //  Referenced by: '<S12>/l4'
+
+  0.0,
+
+  // Expression: 0
+  //  Referenced by: '<S12>/lambda4'
+
+  0.0,
+
+  // Expression: 40
+  //  Referenced by: '<S12>/Gain7'
+
+  40.0,
+
+  // Expression: 1
+  //  Referenced by: '<S12>/Gain8'
+
+  1.0,
+
+  // Computed Parameter: DiscreteTimeIntegrator_gainv_nv
+  //  Referenced by: '<S13>/Discrete-Time Integrator'
+
+  0.005,
+
+  // Expression: 0
+  //  Referenced by: '<S13>/Discrete-Time Integrator'
+
+  0.0,
+
+  // Expression: 180/pi
+  //  Referenced by: '<S13>/Gain2'
+
+  57.295779513082323,
+
+  // Expression: 1/0.00478
+  //  Referenced by: '<S13>/1//J'
+
+  209.20502092050208,
+
+  // Expression: 0.01/0.00478
+  //  Referenced by: '<S13>/k//J'
+
+  2.0920502092050208,
+
+  // Expression: 1
+  //  Referenced by: '<S13>/Saturation'
+
+  1.0,
+
+  // Expression: -1
+  //  Referenced by: '<S13>/Saturation'
+
+  -1.0,
+
+  // Expression: 0
+  //  Referenced by: '<S13>/l1'
+
+  0.0,
+
+  // Expression: 0
+  //  Referenced by: '<S13>/lambda1'
+
+  0.0,
+
+  // Computed Parameter: DiscreteTimeIntegrator1_gainv_g
+  //  Referenced by: '<S13>/Discrete-Time Integrator1'
+
+  0.005,
+
+  // Expression: 0
+  //  Referenced by: '<S13>/Discrete-Time Integrator1'
+
+  0.0,
+
+  // Expression: 0.1
+  //  Referenced by: '<S13>/Constant1'
+
+  0.1,
+
+  // Expression: 1
+  //  Referenced by: '<S13>/Saturation10'
+
+  1.0,
+
+  // Expression: -1
+  //  Referenced by: '<S13>/Saturation10'
+
+  -1.0,
+
+  // Expression: 1
+  //  Referenced by: '<S13>/Saturation11'
+
+  1.0,
+
+  // Expression: -1
+  //  Referenced by: '<S13>/Saturation11'
+
+  -1.0,
+
+  // Expression: 0.5
+  //  Referenced by: '<S13>/Gain'
+
+  0.5,
+
+  // Expression: 1
+  //  Referenced by: '<S13>/Saturation8'
+
+  1.0,
+
+  // Expression: -1
+  //  Referenced by: '<S13>/Saturation8'
+
+  -1.0,
+
+  // Expression: 1
+  //  Referenced by: '<S13>/Constant2'
+
+  1.0,
+
+  // Expression: 30
+  //  Referenced by: '<S13>/Gain5'
+
+  30.0,
+
+  // Expression: 1
+  //  Referenced by: '<S13>/Saturation13'
+
+  1.0,
+
+  // Expression: -1
+  //  Referenced by: '<S13>/Saturation13'
+
+  -1.0,
+
+  // Expression: 1
+  //  Referenced by: '<S13>/Saturation9'
+
+  1.0,
+
+  // Expression: -1
+  //  Referenced by: '<S13>/Saturation9'
+
+  -1.0,
+
+  // Expression: 0.5
+  //  Referenced by: '<S13>/Gain1'
+
+  0.5,
+
+  // Expression: 1
+  //  Referenced by: '<S13>/Constant4'
+
+  1.0,
+
+  // Expression: 1
+  //  Referenced by: '<S13>/Saturation12'
+
+  1.0,
+
+  // Expression: -1
+  //  Referenced by: '<S13>/Saturation12'
+
+  -1.0,
+
+  // Expression: 1
+  //  Referenced by: '<S13>/Saturation16'
+
+  1.0,
+
+  // Expression: -1
+  //  Referenced by: '<S13>/Saturation16'
+
+  -1.0,
+
+  // Expression: 1
+  //  Referenced by: '<S13>/Saturation14'
+
+  1.0,
+
+  // Expression: -1
+  //  Referenced by: '<S13>/Saturation14'
+
+  -1.0,
+
+  // Expression: 0.5
+  //  Referenced by: '<S13>/Gain3'
+
+  0.5,
+
+  // Expression: 1
+  //  Referenced by: '<S13>/Constant6'
+
+  1.0,
+
+  // Expression: 0
+  //  Referenced by: '<S13>/lambda2'
+
+  0.0,
+
+  // Expression: 1
+  //  Referenced by: '<S13>/Saturation1'
+
+  1.0,
+
+  // Expression: -1
+  //  Referenced by: '<S13>/Saturation1'
+
+  -1.0,
+
+  // Expression: 0
+  //  Referenced by: '<S13>/l2'
+
+  0.0,
+
+  // Expression: 1
+  //  Referenced by: '<S13>/Saturation15'
+
+  1.0,
+
+  // Expression: -1
+  //  Referenced by: '<S13>/Saturation15'
+
+  -1.0,
+
+  // Expression: 30
+  //  Referenced by: '<S13>/Gain6'
+
+  30.0,
+
+  // Expression: 1
+  //  Referenced by: '<S13>/Saturation19'
+
+  1.0,
+
+  // Expression: -1
+  //  Referenced by: '<S13>/Saturation19'
+
+  -1.0,
+
+  // Expression: 1
+  //  Referenced by: '<S13>/Saturation17'
+
+  1.0,
+
+  // Expression: -1
+  //  Referenced by: '<S13>/Saturation17'
+
+  -1.0,
+
+  // Expression: 0.5
+  //  Referenced by: '<S13>/Gain4'
+
+  0.5,
+
+  // Expression: 1
+  //  Referenced by: '<S13>/Constant8'
+
+  1.0,
+
+  // Expression: 1
+  //  Referenced by: '<S13>/Saturation18'
+
+  1.0,
+
+  // Expression: -1
+  //  Referenced by: '<S13>/Saturation18'
+
+  -1.0,
+
+  // Expression: 1
+  //  Referenced by: '<S13>/Saturation3'
+
+  1.0,
+
+  // Expression: -1
+  //  Referenced by: '<S13>/Saturation3'
+
+  -1.0,
+
+  // Expression: 0
+  //  Referenced by: '<S13>/l4'
+
+  0.0,
+
+  // Expression: 0
+  //  Referenced by: '<S13>/lambda4'
+
+  0.0,
+
+  // Expression: 40
+  //  Referenced by: '<S13>/Gain7'
+
+  40.0,
+
+  // Expression: 1
+  //  Referenced by: '<S13>/Gain8'
+
+  1.0,
+
   // Expression: 0.2
   //  Referenced by: '<S1>/Saturation2'
 
@@ -1525,11 +1477,6 @@ P_px42LoopCtrQGC20220313_T px42LoopCtrQGC20220313_P = {
   //  Referenced by: '<Root>/Gain9'
 
   57.295780490442965,
-
-  // Expression: 170
-  //  Referenced by: '<Root>/Constant6'
-
-  170.0,
 
   // Expression: 180/3.1415926
   //  Referenced by: '<Root>/Gain5'
@@ -1661,33 +1608,23 @@ P_px42LoopCtrQGC20220313_T px42LoopCtrQGC20220313_P = {
 
   0.0,
 
-  // Computed Parameter: Switch3_Threshold
-  //  Referenced by: '<Root>/Switch3'
-
-  1500U,
-
-  // Computed Parameter: Constant10_Value
-  //  Referenced by: '<Root>/Constant10'
+  // Computed Parameter: Reset_Value
+  //  Referenced by: '<Root>/Reset'
 
   true,
 
-  // Computed Parameter: Constant11_Value
-  //  Referenced by: '<Root>/Constant11'
-
-  false,
-
   // Computed Parameter: attitude_flag_Value
-  //  Referenced by: '<S7>/attitude_flag'
+  //  Referenced by: '<S6>/attitude_flag'
 
   false,
 
   // Computed Parameter: observer_flag_Value
-  //  Referenced by: '<S8>/observer_flag'
+  //  Referenced by: '<S7>/observer_flag'
 
   false,
 
   // Computed Parameter: position_flag_Value
-  //  Referenced by: '<S9>/position_flag'
+  //  Referenced by: '<S8>/position_flag'
 
   false,
 
@@ -1715,16 +1652,6 @@ P_px42LoopCtrQGC20220313_T px42LoopCtrQGC20220313_P = {
   //  Referenced by: '<Root>/Data Store Memory30'
 
   false,
-
-  // Computed Parameter: Gain1_Gain_n
-  //  Referenced by: '<S5>/Gain1'
-
-  128U,
-
-  // Computed Parameter: Gain_Gain_e
-  //  Referenced by: '<S5>/Gain'
-
-  128U,
 
   // Computed Parameter: ManualSwitch_CurrentSetting
   //  Referenced by: '<S1>/Manual Switch'

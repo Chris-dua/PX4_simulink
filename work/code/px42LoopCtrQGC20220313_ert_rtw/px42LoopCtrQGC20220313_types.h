@@ -9,7 +9,7 @@
 //
 // Model version                  : 5.5
 // Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
-// C/C++ source code generated on : Wed Mar 16 10:17:15 2022
+// C/C++ source code generated on : Wed Mar 23 21:30:24 2022
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -19,10 +19,8 @@
 #ifndef RTW_HEADER_px42LoopCtrQGC20220313_types_h_
 #define RTW_HEADER_px42LoopCtrQGC20220313_types_h_
 #include "rtwtypes.h"
-#include "MW_SVD.h"
 #include <uORB/topics/actuator_outputs.h>
 #include <uORB/topics/vehicle_odometry.h>
-#include <uORB/topics/input_rc.h>
 
 // Model Code Variants
 #ifndef struct_px4_internal_block_PWM_px42Lo_T
@@ -70,42 +68,6 @@ struct px4_internal_block_Subscriber_T
 };
 
 #endif                                // struct_px4_internal_block_Subscriber_T
-
-// Custom Type definition for MATLABSystem: '<Root>/Serial Transmit1'
-#include "MW_SVD.h"
-#ifndef struct_c_px4_internal_block_Hardware_T
-#define struct_c_px4_internal_block_Hardware_T
-
-struct c_px4_internal_block_Hardware_T
-{
-  int32_T __dummy;
-};
-
-#endif                                // struct_c_px4_internal_block_Hardware_T
-
-#ifndef struct_d_px4_internal_block_PX4SCIDr_T
-#define struct_d_px4_internal_block_PX4SCIDr_T
-
-struct d_px4_internal_block_PX4SCIDr_T
-{
-  MW_Handle_Type MW_SCIHANDLE;
-};
-
-#endif                                // struct_d_px4_internal_block_PX4SCIDr_T
-
-#ifndef struct_px4_internal_block_PX4SCIWrit_T
-#define struct_px4_internal_block_PX4SCIWrit_T
-
-struct px4_internal_block_PX4SCIWrit_T
-{
-  boolean_T matlabCodegenIsDeleted;
-  int32_T isInitialized;
-  boolean_T isSetupComplete;
-  c_px4_internal_block_Hardware_T Hw;
-  d_px4_internal_block_PX4SCIDr_T SCIDriverObj;
-};
-
-#endif                                // struct_px4_internal_block_PX4SCIWrit_T
 
 // Parameters (default storage)
 typedef struct P_px42LoopCtrQGC20220313_T_ P_px42LoopCtrQGC20220313_T;

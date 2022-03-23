@@ -9,7 +9,7 @@
 //
 // Model version                  : 5.5
 // Simulink Coder version         : 9.7 (R2022a) 13-Nov-2021
-// C/C++ source code generated on : Wed Mar 16 10:17:15 2022
+// C/C++ source code generated on : Wed Mar 23 21:30:24 2022
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -28,7 +28,6 @@ extern "C" {
 
 }
 #include <string.h>
-#include <stddef.h>
 #include "rt_defines.h"
 #include "zero_crossing_types.h"
 #include "px42LoopCtrQGC20220313_dt.h"
@@ -54,7 +53,6 @@ RT_MODEL_px42LoopCtrQGC202203_T *const px42LoopCtrQGC20220313_M =
 // Forward declaration for local functions
 static void px42LoopCtrQGC_SystemCore_setup(px4_internal_block_PWM_px42Lo_T *obj,
   boolean_T varargin_1, boolean_T varargin_2);
-static void px42LoopCtrQ_SystemCore_setup_k(px4_internal_block_PX4SCIWrit_T *obj);
 static void rate_monotonic_scheduler(void);
 
 //
@@ -91,9 +89,9 @@ static void rate_monotonic_scheduler(void)
 
 //
 // Output and update for atomic system:
-//    '<S18>/MATLAB Function'
-//    '<S27>/MATLAB Function'
-//    '<S36>/MATLAB Function'
+//    '<S17>/MATLAB Function'
+//    '<S26>/MATLAB Function'
+//    '<S35>/MATLAB Function'
 //
 void px42LoopCtrQ_MATLABFunction(boolean_T rtu_e, real_T rtu_t, real_T rtu_s_t,
   real_T rtu_y1, real_T rtu_y2, real_T *rty_y)
@@ -242,43 +240,6 @@ static void px42LoopCtrQGC_SystemCore_setup(px4_internal_block_PWM_px42Lo_T *obj
   obj->isSetupComplete = true;
 }
 
-static void px42LoopCtrQ_SystemCore_setup_k(px4_internal_block_PX4SCIWrit_T *obj)
-{
-  uint32_T RxPinLoc;
-  uint32_T TxPinLoc;
-  char_T b_SCIModuleLoc[11];
-  static const char_T tmp[10] = { '/', 'd', 'e', 'v', '/', 't', 't', 'y', 'S',
-    '1' };
-
-  obj->isSetupComplete = false;
-  obj->isInitialized = 1;
-  RxPinLoc = MW_UNDEFINED_VALUE;
-  TxPinLoc = MW_UNDEFINED_VALUE;
-  for (int32_T i = 0; i < 10; i++) {
-    b_SCIModuleLoc[i] = tmp[i];
-  }
-
-  MW_SCI_HardwareFlowControl_Type HardwareFlowControlValue;
-  MW_SCI_Parity_Type ParityValue;
-  MW_SCI_StopBits_Type StopBitsValue;
-  void* SCIModuleVoidPtr;
-  b_SCIModuleLoc[10] = '\x00';
-  SCIModuleVoidPtr = (void*)(&b_SCIModuleLoc[0]);
-  obj->SCIDriverObj.MW_SCIHANDLE = MW_SCI_Open(SCIModuleVoidPtr, true, RxPinLoc,
-    TxPinLoc);
-  MW_SCI_SetBaudrate(obj->SCIDriverObj.MW_SCIHANDLE, 9600U);
-  StopBitsValue = MW_SCI_STOPBITS_1;
-  ParityValue = MW_SCI_PARITY_NONE;
-  MW_SCI_SetFrameFormat(obj->SCIDriverObj.MW_SCIHANDLE, 8, ParityValue,
-                        StopBitsValue);
-  RxPinLoc = MW_UNDEFINED_VALUE;
-  TxPinLoc = MW_UNDEFINED_VALUE;
-  HardwareFlowControlValue = MW_SCI_FLOWCONTROL_NONE;
-  MW_SCI_ConfigureHardwareFlowControl(obj->SCIDriverObj.MW_SCIHANDLE,
-    HardwareFlowControlValue, RxPinLoc, TxPinLoc);
-  obj->isSetupComplete = true;
-}
-
 // Model step function for TID0
 void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
 {
@@ -286,7 +247,6 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
   real_T roll_tmp_0;
   real_T u0_tmp;
   uint16_T status;
-  boolean_T b_varargout_1;
   boolean_T rtb_Compare;
   boolean_T rtb_Compare_g2;
   boolean_T rtb_Compare_i;
@@ -306,7 +266,7 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
   srClearBC(px42LoopCtrQGC20220313_DW.Subsystem_SubsysRanBC);
 
   // Reset subsysRan breadcrumbs
-  srClearBC(px42LoopCtrQGC20220313_DW.EnabledSubsystem_SubsysRanBC_p);
+  srClearBC(px42LoopCtrQGC20220313_DW.EnabledSubsystem_SubsysRanBC);
 
   // Reset subsysRan breadcrumbs
   srClearBC(px42LoopCtrQGC20220313_DW.IfActionSubsystem_SubsysRanBC);
@@ -318,17 +278,14 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
   srClearBC(px42LoopCtrQGC20220313_DW.IfActionSubsystem2_SubsysRanBC);
 
   // Reset subsysRan breadcrumbs
-  srClearBC(px42LoopCtrQGC20220313_DW.EnabledSubsystem_SubsysRanBC);
-
-  // Reset subsysRan breadcrumbs
   srClearBC(px42LoopCtrQGC20220313_DW.Subsystem1_SubsysRanBC);
 
-  // Switch: '<S12>/Switch' incorporates:
+  // Switch: '<S11>/Switch' incorporates:
   //   Constant: '<Root>/Constant3'
-  //   Constant: '<S12>/Constant1'
+  //   Constant: '<S11>/Constant1'
   //   DataStoreRead: '<Root>/Data Store Read20'
-  //   DataStoreRead: '<S12>/Data Store Read'
-  //   DataStoreRead: '<S12>/Data Store Read1'
+  //   DataStoreRead: '<S11>/Data Store Read'
+  //   DataStoreRead: '<S11>/Data Store Read1'
 
   if (px42LoopCtrQGC20220313_DW.attitude_flag) {
     px42LoopCtrQGC20220313_B.rtb_DataTypeConversion3_idx_0 =
@@ -346,84 +303,83 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
       px42LoopCtrQGC20220313_P.Constant1_Value_a;
   }
 
-  // End of Switch: '<S12>/Switch'
+  // End of Switch: '<S11>/Switch'
 
-  // RelationalOperator: '<S37>/Compare' incorporates:
-  //   Abs: '<S36>/Abs'
-  //   Constant: '<S37>/Constant'
-  //   DataStoreRead: '<S36>/Data Store Read1'
+  // RelationalOperator: '<S36>/Compare' incorporates:
+  //   Abs: '<S35>/Abs'
+  //   Constant: '<S36>/Constant'
+  //   DataStoreRead: '<S35>/Data Store Read1'
 
   rtb_Compare = (fabs(px42LoopCtrQGC20220313_DW.e_pitch_yaw) >=
                  px42LoopCtrQGC20220313_P.CompareToConstant1_const);
 
-  // Sum: '<S36>/Add' incorporates:
-  //   DataStoreRead: '<S36>/Data Store Read'
-  //   DataStoreRead: '<S36>/Data Store Read3'
-  //   Sum: '<S39>/Add'
+  // Sum: '<S35>/Add' incorporates:
+  //   DataStoreRead: '<S35>/Data Store Read'
+  //   DataStoreRead: '<S35>/Data Store Read3'
+  //   Sum: '<S38>/Add'
 
   px42LoopCtrQGC20220313_B.Abs6 = px42LoopCtrQGC20220313_DW.t -
     px42LoopCtrQGC20220313_DW.start_time_yaw;
 
-  // Fcn: '<S36>/Fcn' incorporates:
-  //   Constant: '<S36>/T'
-  //   Constant: '<S36>/ch'
-  //   Sum: '<S36>/Add'
+  // Fcn: '<S35>/Fcn' incorporates:
+  //   Constant: '<S35>/T'
+  //   Constant: '<S35>/ch'
+  //   Sum: '<S35>/Add'
 
-  px42LoopCtrQGC20220313_B.rtb_Fcn_bh = px42LoopCtrQGC20220313_P.ch_Value /
+  px42LoopCtrQGC20220313_B.rtb_Fcn_c = px42LoopCtrQGC20220313_P.ch_Value /
     (px42LoopCtrQGC20220313_P.T_Value - px42LoopCtrQGC20220313_B.Abs6);
 
-  // MATLAB Function: '<S36>/MATLAB Function' incorporates:
-  //   Constant: '<S36>/t'
-  //   DataStoreRead: '<S36>/Data Store Read'
-  //   DataStoreRead: '<S36>/Data Store Read3'
+  // MATLAB Function: '<S35>/MATLAB Function' incorporates:
+  //   Constant: '<S35>/t'
+  //   DataStoreRead: '<S35>/Data Store Read'
+  //   DataStoreRead: '<S35>/Data Store Read3'
 
   px42LoopCtrQ_MATLABFunction(rtb_Compare, px42LoopCtrQGC20220313_DW.t,
-    px42LoopCtrQGC20220313_DW.start_time_yaw,
-    px42LoopCtrQGC20220313_B.rtb_Fcn_bh, px42LoopCtrQGC20220313_P.t_Value,
-    &px42LoopCtrQGC20220313_B.y);
+    px42LoopCtrQGC20220313_DW.start_time_yaw, px42LoopCtrQGC20220313_B.rtb_Fcn_c,
+    px42LoopCtrQGC20220313_P.t_Value, &px42LoopCtrQGC20220313_B.y);
 
-  // Sum: '<S36>/Add1' incorporates:
-  //   Constant: '<S36>/r'
+  // Sum: '<S35>/Add1' incorporates:
+  //   Constant: '<S35>/r'
 
   px42LoopCtrQGC20220313_B.z2 = px42LoopCtrQGC20220313_P.r_Value +
     px42LoopCtrQGC20220313_B.y;
 
-  // Sum: '<S35>/Add' incorporates:
-  //   Sum: '<S12>/Add2'
+  // Sum: '<S34>/Add' incorporates:
+  //   Sum: '<S11>/Add2'
 
   px42LoopCtrQGC20220313_DW.e_pitch_yaw =
     px42LoopCtrQGC20220313_B.rtb_DataTypeConversion3_idx_0 -
     px42LoopCtrQGC20220313_B.rtb_DataTypeConversion3_idx_1;
 
-  // Gain: '<S35>/Gain4' incorporates:
-  //   Constant: '<S12>/b'
-  //   Product: '<S35>/Product'
-  //   Sum: '<S35>/Add'
+  // Gain: '<S34>/Gain4' incorporates:
+  //   Constant: '<S11>/b'
+  //   Product: '<S34>/Product'
+  //   Sum: '<S34>/Add'
 
   px42LoopCtrQGC20220313_B.ManualSwitch_g =
     px42LoopCtrQGC20220313_DW.e_pitch_yaw * px42LoopCtrQGC20220313_B.z2 *
     px42LoopCtrQGC20220313_P.b_Value * px42LoopCtrQGC20220313_P.Gain4_Gain;
 
-  // SampleTimeMath: '<S34>/TSamp'
+  // SampleTimeMath: '<S33>/TSamp'
   //
-  //  About '<S34>/TSamp':
+  //  About '<S33>/TSamp':
   //   y = u * K where K = 1 / ( w * Ts )
 
   px42LoopCtrQGC20220313_B.TSamp = px42LoopCtrQGC20220313_B.ManualSwitch_g *
     px42LoopCtrQGC20220313_P.TSamp_WtEt;
 
-  // Sum: '<S12>/Add1'
+  // Sum: '<S11>/Add1'
   px42LoopCtrQGC20220313_B.ManualSwitch_g =
     px42LoopCtrQGC20220313_B.rtb_DataTypeConversion3_idx_2 -
     px42LoopCtrQGC20220313_B.ManualSwitch_g;
 
   // Gain: '<S1>/Gain1' incorporates:
-  //   DiscreteIntegrator: '<S15>/Discrete-Time Integrator3'
+  //   DiscreteIntegrator: '<S14>/Discrete-Time Integrator3'
 
   px42LoopCtrQGC20220313_B.Product6_a = px42LoopCtrQGC20220313_P.Gain1_Gain_o *
     px42LoopCtrQGC20220313_DW.DiscreteTimeIntegrator3_DSTATE;
 
-  // Signum: '<S12>/Sign'
+  // Signum: '<S11>/Sign'
   if (rtIsNaN(px42LoopCtrQGC20220313_B.ManualSwitch_g)) {
     px42LoopCtrQGC20220313_B.fcn5 = px42LoopCtrQGC20220313_B.ManualSwitch_g;
   } else if (px42LoopCtrQGC20220313_B.ManualSwitch_g < 0.0) {
@@ -433,7 +389,7 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
       0.0);
   }
 
-  // End of Signum: '<S12>/Sign'
+  // End of Signum: '<S11>/Sign'
 
   // Saturate: '<S1>/Saturation4'
   if (px42LoopCtrQGC20220313_B.Product6_a >
@@ -449,22 +405,22 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
   // End of Saturate: '<S1>/Saturation4'
 
   // Sum: '<S1>/Add3' incorporates:
-  //   Constant: '<S12>/b'
-  //   Constant: '<S12>/l'
-  //   DataStoreWrite: '<S12>/Data Store Write'
-  //   Gain: '<S12>/Gain'
-  //   Gain: '<S12>/Gain1'
-  //   Product: '<S12>/Product'
-  //   Product: '<S12>/Product1'
-  //   Sum: '<S12>/Add'
-  //   Sum: '<S34>/Diff'
-  //   UnitDelay: '<S34>/UD'
+  //   Constant: '<S11>/b'
+  //   Constant: '<S11>/l'
+  //   DataStoreWrite: '<S11>/Data Store Write'
+  //   Gain: '<S11>/Gain'
+  //   Gain: '<S11>/Gain1'
+  //   Product: '<S11>/Product'
+  //   Product: '<S11>/Product1'
+  //   Sum: '<S11>/Add'
+  //   Sum: '<S33>/Diff'
+  //   UnitDelay: '<S33>/UD'
   //
-  //  Block description for '<S34>/Diff':
+  //  Block description for '<S33>/Diff':
   //
   //   Add in CPU
   //
-  //  Block description for '<S34>/UD':
+  //  Block description for '<S33>/UD':
   //
   //   Store in Global RAM
 
@@ -536,11 +492,11 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
 
   // End of ManualSwitch: '<Root>/Manual Switch'
 
-  // Switch: '<S10>/Switch' incorporates:
-  //   Constant: '<S10>/Constant1'
+  // Switch: '<S9>/Switch' incorporates:
+  //   Constant: '<S9>/Constant1'
   //   DataStoreRead: '<Root>/Data Store Read14'
-  //   DataStoreRead: '<S10>/Data Store Read'
-  //   DataStoreRead: '<S10>/Data Store Read1'
+  //   DataStoreRead: '<S9>/Data Store Read'
+  //   DataStoreRead: '<S9>/Data Store Read1'
 
   if (px42LoopCtrQGC20220313_DW.attitude_flag) {
     px42LoopCtrQGC20220313_B.rtb_DataTypeConversion3_idx_0 =
@@ -558,83 +514,83 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
       px42LoopCtrQGC20220313_P.Constant1_Value;
   }
 
-  // End of Switch: '<S10>/Switch'
+  // End of Switch: '<S9>/Switch'
 
-  // RelationalOperator: '<S19>/Compare' incorporates:
-  //   Abs: '<S18>/Abs'
-  //   Constant: '<S19>/Constant'
-  //   DataStoreRead: '<S18>/Data Store Read1'
+  // RelationalOperator: '<S18>/Compare' incorporates:
+  //   Abs: '<S17>/Abs'
+  //   Constant: '<S18>/Constant'
+  //   DataStoreRead: '<S17>/Data Store Read1'
 
   rtb_Compare_i = (fabs(px42LoopCtrQGC20220313_DW.e_pitch) >=
                    px42LoopCtrQGC20220313_P.CompareToConstant1_const_b);
 
-  // Sum: '<S18>/Add' incorporates:
-  //   DataStoreRead: '<S18>/Data Store Read'
-  //   DataStoreRead: '<S18>/Data Store Read3'
-  //   Sum: '<S21>/Add'
+  // Sum: '<S17>/Add' incorporates:
+  //   DataStoreRead: '<S17>/Data Store Read'
+  //   DataStoreRead: '<S17>/Data Store Read3'
+  //   Sum: '<S20>/Add'
 
   px42LoopCtrQGC20220313_B.Product4 = px42LoopCtrQGC20220313_DW.t -
     px42LoopCtrQGC20220313_DW.start_time;
 
-  // Fcn: '<S18>/Fcn' incorporates:
-  //   Constant: '<S18>/T'
-  //   Constant: '<S18>/ch'
-  //   Sum: '<S18>/Add'
+  // Fcn: '<S17>/Fcn' incorporates:
+  //   Constant: '<S17>/T'
+  //   Constant: '<S17>/ch'
+  //   Sum: '<S17>/Add'
 
-  px42LoopCtrQGC20220313_B.rtb_Fcn_b_c = px42LoopCtrQGC20220313_P.ch_Value_j /
+  px42LoopCtrQGC20220313_B.rtb_Fcn_b_k = px42LoopCtrQGC20220313_P.ch_Value_j /
     (px42LoopCtrQGC20220313_P.T_Value_p - px42LoopCtrQGC20220313_B.Product4);
 
-  // MATLAB Function: '<S18>/MATLAB Function' incorporates:
-  //   Constant: '<S18>/t'
-  //   DataStoreRead: '<S18>/Data Store Read'
-  //   DataStoreRead: '<S18>/Data Store Read3'
+  // MATLAB Function: '<S17>/MATLAB Function' incorporates:
+  //   Constant: '<S17>/t'
+  //   DataStoreRead: '<S17>/Data Store Read'
+  //   DataStoreRead: '<S17>/Data Store Read3'
 
   px42LoopCtrQ_MATLABFunction(rtb_Compare_i, px42LoopCtrQGC20220313_DW.t,
-    px42LoopCtrQGC20220313_DW.start_time, px42LoopCtrQGC20220313_B.rtb_Fcn_b_c,
+    px42LoopCtrQGC20220313_DW.start_time, px42LoopCtrQGC20220313_B.rtb_Fcn_b_k,
     px42LoopCtrQGC20220313_P.t_Value_n, &px42LoopCtrQGC20220313_B.y_j);
 
-  // Sum: '<S18>/Add1' incorporates:
-  //   Constant: '<S18>/r'
+  // Sum: '<S17>/Add1' incorporates:
+  //   Constant: '<S17>/r'
 
   px42LoopCtrQGC20220313_B.z2_e = px42LoopCtrQGC20220313_P.r_Value_g +
     px42LoopCtrQGC20220313_B.y_j;
 
-  // Sum: '<S17>/Add' incorporates:
-  //   Sum: '<S10>/Add2'
+  // Sum: '<S16>/Add' incorporates:
+  //   Sum: '<S9>/Add2'
 
   px42LoopCtrQGC20220313_DW.e_pitch =
     px42LoopCtrQGC20220313_B.rtb_DataTypeConversion3_idx_0 -
     px42LoopCtrQGC20220313_B.rtb_DataTypeConversion3_idx_1;
 
-  // Gain: '<S17>/Gain4' incorporates:
-  //   Constant: '<S10>/b'
-  //   Product: '<S17>/Product'
-  //   Sum: '<S17>/Add'
+  // Gain: '<S16>/Gain4' incorporates:
+  //   Constant: '<S9>/b'
+  //   Product: '<S16>/Product'
+  //   Sum: '<S16>/Add'
 
   px42LoopCtrQGC20220313_B.roll_hat = px42LoopCtrQGC20220313_DW.e_pitch *
     px42LoopCtrQGC20220313_B.z2_e * px42LoopCtrQGC20220313_P.b_Value_l *
     px42LoopCtrQGC20220313_P.Gain4_Gain_b;
 
-  // SampleTimeMath: '<S16>/TSamp'
+  // SampleTimeMath: '<S15>/TSamp'
   //
-  //  About '<S16>/TSamp':
+  //  About '<S15>/TSamp':
   //   y = u * K where K = 1 / ( w * Ts )
 
   px42LoopCtrQGC20220313_B.z2 = px42LoopCtrQGC20220313_B.roll_hat *
     px42LoopCtrQGC20220313_P.TSamp_WtEt_p;
 
-  // Sum: '<S10>/Add1'
+  // Sum: '<S9>/Add1'
   px42LoopCtrQGC20220313_B.roll_hat =
     px42LoopCtrQGC20220313_B.rtb_DataTypeConversion3_idx_2 -
     px42LoopCtrQGC20220313_B.roll_hat;
 
   // Gain: '<S1>/Gain2' incorporates:
-  //   DiscreteIntegrator: '<S13>/Discrete-Time Integrator3'
+  //   DiscreteIntegrator: '<S12>/Discrete-Time Integrator3'
 
   px42LoopCtrQGC20220313_B.Gain2 = px42LoopCtrQGC20220313_P.Gain2_Gain *
     px42LoopCtrQGC20220313_DW.DiscreteTimeIntegrator3_DSTAT_a;
 
-  // Signum: '<S10>/Sign'
+  // Signum: '<S9>/Sign'
   if (rtIsNaN(px42LoopCtrQGC20220313_B.roll_hat)) {
     px42LoopCtrQGC20220313_B.fcn5 = px42LoopCtrQGC20220313_B.roll_hat;
   } else if (px42LoopCtrQGC20220313_B.roll_hat < 0.0) {
@@ -643,26 +599,26 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
     px42LoopCtrQGC20220313_B.fcn5 = (px42LoopCtrQGC20220313_B.roll_hat > 0.0);
   }
 
-  // End of Signum: '<S10>/Sign'
+  // End of Signum: '<S9>/Sign'
 
   // Sum: '<S1>/Add2' incorporates:
-  //   Constant: '<S10>/b'
-  //   Constant: '<S10>/l'
+  //   Constant: '<S9>/b'
+  //   Constant: '<S9>/l'
   //   DataStoreWrite: '<Root>/Data Store Write12'
-  //   DataStoreWrite: '<S10>/Data Store Write'
-  //   Gain: '<S10>/Gain'
-  //   Gain: '<S10>/Gain1'
-  //   Product: '<S10>/Product'
-  //   Product: '<S10>/Product1'
-  //   Sum: '<S10>/Add'
-  //   Sum: '<S16>/Diff'
-  //   UnitDelay: '<S16>/UD'
+  //   DataStoreWrite: '<S9>/Data Store Write'
+  //   Gain: '<S9>/Gain'
+  //   Gain: '<S9>/Gain1'
+  //   Product: '<S9>/Product'
+  //   Product: '<S9>/Product1'
+  //   Sum: '<S15>/Diff'
+  //   Sum: '<S9>/Add'
+  //   UnitDelay: '<S15>/UD'
   //
-  //  Block description for '<S16>/Diff':
+  //  Block description for '<S15>/Diff':
   //
   //   Add in CPU
   //
-  //  Block description for '<S16>/UD':
+  //  Block description for '<S15>/UD':
   //
   //   Store in Global RAM
 
@@ -674,11 +630,11 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
     px42LoopCtrQGC20220313_B.rtb_DataTypeConversion3_idx_2) *
     px42LoopCtrQGC20220313_P.Gain1_Gain_b - px42LoopCtrQGC20220313_B.Gain2;
 
-  // Switch: '<S11>/Switch' incorporates:
-  //   Constant: '<S11>/Constant1'
+  // Switch: '<S10>/Switch' incorporates:
+  //   Constant: '<S10>/Constant1'
   //   DataStoreRead: '<Root>/Data Store Read18'
-  //   DataStoreRead: '<S11>/Data Store Read'
-  //   DataStoreRead: '<S11>/Data Store Read1'
+  //   DataStoreRead: '<S10>/Data Store Read'
+  //   DataStoreRead: '<S10>/Data Store Read1'
 
   if (px42LoopCtrQGC20220313_DW.attitude_flag) {
     px42LoopCtrQGC20220313_B.rtb_DataTypeConversion3_idx_0 =
@@ -696,84 +652,84 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
       px42LoopCtrQGC20220313_P.Constant1_Value_n;
   }
 
-  // End of Switch: '<S11>/Switch'
+  // End of Switch: '<S10>/Switch'
 
-  // RelationalOperator: '<S28>/Compare' incorporates:
-  //   Abs: '<S27>/Abs'
-  //   Constant: '<S28>/Constant'
-  //   DataStoreRead: '<S27>/Data Store Read1'
+  // RelationalOperator: '<S27>/Compare' incorporates:
+  //   Abs: '<S26>/Abs'
+  //   Constant: '<S27>/Constant'
+  //   DataStoreRead: '<S26>/Data Store Read1'
 
   rtb_Compare_g2 = (fabs(px42LoopCtrQGC20220313_DW.e_pitch_roll) >=
                     px42LoopCtrQGC20220313_P.CompareToConstant1_const_h);
 
-  // Sum: '<S27>/Add' incorporates:
-  //   DataStoreRead: '<S27>/Data Store Read'
-  //   DataStoreRead: '<S27>/Data Store Read3'
-  //   Sum: '<S30>/Add'
+  // Sum: '<S26>/Add' incorporates:
+  //   DataStoreRead: '<S26>/Data Store Read'
+  //   DataStoreRead: '<S26>/Data Store Read3'
+  //   Sum: '<S29>/Add'
 
   px42LoopCtrQGC20220313_B.Product6 = px42LoopCtrQGC20220313_DW.t -
     px42LoopCtrQGC20220313_DW.start_time_roll;
 
-  // Fcn: '<S27>/Fcn' incorporates:
-  //   Constant: '<S27>/T'
-  //   Constant: '<S27>/ch'
-  //   Sum: '<S27>/Add'
+  // Fcn: '<S26>/Fcn' incorporates:
+  //   Constant: '<S26>/T'
+  //   Constant: '<S26>/ch'
+  //   Sum: '<S26>/Add'
 
-  px42LoopCtrQGC20220313_B.rtb_Fcn_a_k = px42LoopCtrQGC20220313_P.ch_Value_e /
+  px42LoopCtrQGC20220313_B.rtb_Fcn_a_c = px42LoopCtrQGC20220313_P.ch_Value_e /
     (px42LoopCtrQGC20220313_P.T_Value_c - px42LoopCtrQGC20220313_B.Product6);
 
-  // MATLAB Function: '<S27>/MATLAB Function' incorporates:
-  //   Constant: '<S27>/t'
-  //   DataStoreRead: '<S27>/Data Store Read'
-  //   DataStoreRead: '<S27>/Data Store Read3'
+  // MATLAB Function: '<S26>/MATLAB Function' incorporates:
+  //   Constant: '<S26>/t'
+  //   DataStoreRead: '<S26>/Data Store Read'
+  //   DataStoreRead: '<S26>/Data Store Read3'
 
   px42LoopCtrQ_MATLABFunction(rtb_Compare_g2, px42LoopCtrQGC20220313_DW.t,
     px42LoopCtrQGC20220313_DW.start_time_roll,
-    px42LoopCtrQGC20220313_B.rtb_Fcn_a_k, px42LoopCtrQGC20220313_P.t_Value_m,
+    px42LoopCtrQGC20220313_B.rtb_Fcn_a_c, px42LoopCtrQGC20220313_P.t_Value_m,
     &px42LoopCtrQGC20220313_B.y_o);
 
-  // Sum: '<S27>/Add1' incorporates:
-  //   Constant: '<S27>/r'
+  // Sum: '<S26>/Add1' incorporates:
+  //   Constant: '<S26>/r'
 
   px42LoopCtrQGC20220313_B.z2_l = px42LoopCtrQGC20220313_P.r_Value_p +
     px42LoopCtrQGC20220313_B.y_o;
 
-  // Sum: '<S26>/Add' incorporates:
-  //   Sum: '<S11>/Add2'
+  // Sum: '<S25>/Add' incorporates:
+  //   Sum: '<S10>/Add2'
 
   px42LoopCtrQGC20220313_DW.e_pitch_roll =
     px42LoopCtrQGC20220313_B.rtb_DataTypeConversion3_idx_0 -
     px42LoopCtrQGC20220313_B.rtb_DataTypeConversion3_idx_1;
 
-  // Gain: '<S26>/Gain4' incorporates:
-  //   Constant: '<S11>/b'
-  //   Product: '<S26>/Product'
-  //   Sum: '<S26>/Add'
+  // Gain: '<S25>/Gain4' incorporates:
+  //   Constant: '<S10>/b'
+  //   Product: '<S25>/Product'
+  //   Sum: '<S25>/Add'
 
   px42LoopCtrQGC20220313_B.roll_hat = px42LoopCtrQGC20220313_DW.e_pitch_roll *
     px42LoopCtrQGC20220313_B.z2_l * px42LoopCtrQGC20220313_P.b_Value_h *
     px42LoopCtrQGC20220313_P.Gain4_Gain_o;
 
-  // SampleTimeMath: '<S25>/TSamp'
+  // SampleTimeMath: '<S24>/TSamp'
   //
-  //  About '<S25>/TSamp':
+  //  About '<S24>/TSamp':
   //   y = u * K where K = 1 / ( w * Ts )
 
   px42LoopCtrQGC20220313_B.z2_e = px42LoopCtrQGC20220313_B.roll_hat *
     px42LoopCtrQGC20220313_P.TSamp_WtEt_o;
 
-  // Sum: '<S11>/Add1'
+  // Sum: '<S10>/Add1'
   px42LoopCtrQGC20220313_B.roll_hat =
     px42LoopCtrQGC20220313_B.rtb_DataTypeConversion3_idx_2 -
     px42LoopCtrQGC20220313_B.roll_hat;
 
   // Gain: '<S1>/J' incorporates:
-  //   DiscreteIntegrator: '<S14>/Discrete-Time Integrator3'
+  //   DiscreteIntegrator: '<S13>/Discrete-Time Integrator3'
 
   px42LoopCtrQGC20220313_B.J = px42LoopCtrQGC20220313_P.J_Gain_b *
     px42LoopCtrQGC20220313_DW.DiscreteTimeIntegrator3_DSTAT_m;
 
-  // Signum: '<S11>/Sign'
+  // Signum: '<S10>/Sign'
   if (rtIsNaN(px42LoopCtrQGC20220313_B.roll_hat)) {
     px42LoopCtrQGC20220313_B.fcn5 = px42LoopCtrQGC20220313_B.roll_hat;
   } else if (px42LoopCtrQGC20220313_B.roll_hat < 0.0) {
@@ -782,26 +738,26 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
     px42LoopCtrQGC20220313_B.fcn5 = (px42LoopCtrQGC20220313_B.roll_hat > 0.0);
   }
 
-  // End of Signum: '<S11>/Sign'
+  // End of Signum: '<S10>/Sign'
 
   // Sum: '<S1>/Add1' incorporates:
-  //   Constant: '<S11>/b'
-  //   Constant: '<S11>/l'
+  //   Constant: '<S10>/b'
+  //   Constant: '<S10>/l'
   //   DataStoreWrite: '<Root>/Data Store Write13'
-  //   DataStoreWrite: '<S11>/Data Store Write'
-  //   Gain: '<S11>/Gain'
-  //   Gain: '<S11>/J'
-  //   Product: '<S11>/Product'
-  //   Product: '<S11>/Product1'
-  //   Sum: '<S11>/Add'
-  //   Sum: '<S25>/Diff'
-  //   UnitDelay: '<S25>/UD'
+  //   DataStoreWrite: '<S10>/Data Store Write'
+  //   Gain: '<S10>/Gain'
+  //   Gain: '<S10>/J'
+  //   Product: '<S10>/Product'
+  //   Product: '<S10>/Product1'
+  //   Sum: '<S10>/Add'
+  //   Sum: '<S24>/Diff'
+  //   UnitDelay: '<S24>/UD'
   //
-  //  Block description for '<S25>/Diff':
+  //  Block description for '<S24>/Diff':
   //
   //   Add in CPU
   //
-  //  Block description for '<S25>/UD':
+  //  Block description for '<S24>/UD':
   //
   //   Store in Global RAM
 
@@ -814,30 +770,30 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
     px42LoopCtrQGC20220313_B.rtb_DataTypeConversion3_idx_2) *
     px42LoopCtrQGC20220313_P.J_Gain - px42LoopCtrQGC20220313_B.J;
 
-  // DataStoreRead: '<S36>/Data Store Read4'
+  // DataStoreRead: '<S35>/Data Store Read4'
   px42LoopCtrQGC20220313_B.DataStoreRead4 =
     px42LoopCtrQGC20220313_DW.start_time_yaw;
 
-  // Logic: '<S39>/Logical Operator' incorporates:
-  //   Abs: '<S39>/Abs1'
+  // Logic: '<S38>/Logical Operator' incorporates:
+  //   Abs: '<S38>/Abs1'
+  //   Constant: '<S39>/Constant'
   //   Constant: '<S40>/Constant'
-  //   Constant: '<S41>/Constant'
-  //   DataStoreRead: '<S39>/Data Store Read2'
+  //   DataStoreRead: '<S38>/Data Store Read2'
+  //   RelationalOperator: '<S39>/Compare'
   //   RelationalOperator: '<S40>/Compare'
-  //   RelationalOperator: '<S41>/Compare'
 
   rtb_LogicalOperator = ((fabs(px42LoopCtrQGC20220313_DW.e_pitch_yaw) >=
     px42LoopCtrQGC20220313_P.CompareToConstant2_const) &&
     (px42LoopCtrQGC20220313_B.Abs6 >=
      px42LoopCtrQGC20220313_P.CompareToConstant1_const_hq));
 
-  // Outputs for Triggered SubSystem: '<S39>/Subsystem' incorporates:
-  //   TriggerPort: '<S42>/Trigger'
+  // Outputs for Triggered SubSystem: '<S38>/Subsystem' incorporates:
+  //   TriggerPort: '<S41>/Trigger'
 
   if (rtb_LogicalOperator && (px42LoopCtrQGC20220313_PrevZCX.Subsystem_Trig_ZCE
        != POS_ZCSIG)) {
-    // DataStoreWrite: '<S42>/Data Store Write' incorporates:
-    //   DataStoreRead: '<S42>/Data Store Read2'
+    // DataStoreWrite: '<S41>/Data Store Write' incorporates:
+    //   DataStoreRead: '<S41>/Data Store Read2'
 
     px42LoopCtrQGC20220313_DW.start_time_yaw = px42LoopCtrQGC20220313_DW.t;
     px42LoopCtrQGC20220313_DW.Subsystem_SubsysRanBC = 4;
@@ -845,31 +801,31 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
 
   px42LoopCtrQGC20220313_PrevZCX.Subsystem_Trig_ZCE = rtb_LogicalOperator;
 
-  // End of Outputs for SubSystem: '<S39>/Subsystem'
-  // DataStoreRead: '<S18>/Data Store Read4'
+  // End of Outputs for SubSystem: '<S38>/Subsystem'
+  // DataStoreRead: '<S17>/Data Store Read4'
   px42LoopCtrQGC20220313_B.DataStoreRead4_g =
     px42LoopCtrQGC20220313_DW.start_time;
 
-  // Logic: '<S21>/Logical Operator' incorporates:
-  //   Abs: '<S21>/Abs1'
+  // Logic: '<S20>/Logical Operator' incorporates:
+  //   Abs: '<S20>/Abs1'
+  //   Constant: '<S21>/Constant'
   //   Constant: '<S22>/Constant'
-  //   Constant: '<S23>/Constant'
-  //   DataStoreRead: '<S21>/Data Store Read2'
+  //   DataStoreRead: '<S20>/Data Store Read2'
+  //   RelationalOperator: '<S21>/Compare'
   //   RelationalOperator: '<S22>/Compare'
-  //   RelationalOperator: '<S23>/Compare'
 
   rtb_LogicalOperator = ((fabs(px42LoopCtrQGC20220313_DW.e_pitch) >=
     px42LoopCtrQGC20220313_P.CompareToConstant2_const_o) &&
     (px42LoopCtrQGC20220313_B.Product4 >=
      px42LoopCtrQGC20220313_P.CompareToConstant1_const_p));
 
-  // Outputs for Triggered SubSystem: '<S21>/Subsystem' incorporates:
-  //   TriggerPort: '<S24>/Trigger'
+  // Outputs for Triggered SubSystem: '<S20>/Subsystem' incorporates:
+  //   TriggerPort: '<S23>/Trigger'
 
   if (rtb_LogicalOperator &&
       (px42LoopCtrQGC20220313_PrevZCX.Subsystem_Trig_ZCE_e != POS_ZCSIG)) {
-    // DataStoreWrite: '<S24>/Data Store Write' incorporates:
-    //   DataStoreRead: '<S24>/Data Store Read2'
+    // DataStoreWrite: '<S23>/Data Store Write' incorporates:
+    //   DataStoreRead: '<S23>/Data Store Read2'
 
     px42LoopCtrQGC20220313_DW.start_time = px42LoopCtrQGC20220313_DW.t;
     px42LoopCtrQGC20220313_DW.Subsystem_SubsysRanBC_k = 4;
@@ -877,31 +833,31 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
 
   px42LoopCtrQGC20220313_PrevZCX.Subsystem_Trig_ZCE_e = rtb_LogicalOperator;
 
-  // End of Outputs for SubSystem: '<S21>/Subsystem'
-  // DataStoreRead: '<S27>/Data Store Read4'
+  // End of Outputs for SubSystem: '<S20>/Subsystem'
+  // DataStoreRead: '<S26>/Data Store Read4'
   px42LoopCtrQGC20220313_B.DataStoreRead4_b =
     px42LoopCtrQGC20220313_DW.start_time_roll;
 
-  // Logic: '<S30>/Logical Operator' incorporates:
-  //   Abs: '<S30>/Abs1'
+  // Logic: '<S29>/Logical Operator' incorporates:
+  //   Abs: '<S29>/Abs1'
+  //   Constant: '<S30>/Constant'
   //   Constant: '<S31>/Constant'
-  //   Constant: '<S32>/Constant'
-  //   DataStoreRead: '<S30>/Data Store Read2'
+  //   DataStoreRead: '<S29>/Data Store Read2'
+  //   RelationalOperator: '<S30>/Compare'
   //   RelationalOperator: '<S31>/Compare'
-  //   RelationalOperator: '<S32>/Compare'
 
   rtb_LogicalOperator = ((fabs(px42LoopCtrQGC20220313_DW.e_pitch_roll) >=
     px42LoopCtrQGC20220313_P.CompareToConstant2_const_a) &&
     (px42LoopCtrQGC20220313_B.Product6 >=
      px42LoopCtrQGC20220313_P.CompareToConstant1_const_a));
 
-  // Outputs for Triggered SubSystem: '<S30>/Subsystem' incorporates:
-  //   TriggerPort: '<S33>/Trigger'
+  // Outputs for Triggered SubSystem: '<S29>/Subsystem' incorporates:
+  //   TriggerPort: '<S32>/Trigger'
 
   if (rtb_LogicalOperator &&
       (px42LoopCtrQGC20220313_PrevZCX.Subsystem_Trig_ZCE_j != POS_ZCSIG)) {
-    // DataStoreWrite: '<S33>/Data Store Write' incorporates:
-    //   DataStoreRead: '<S33>/Data Store Read2'
+    // DataStoreWrite: '<S32>/Data Store Write' incorporates:
+    //   DataStoreRead: '<S32>/Data Store Read2'
 
     px42LoopCtrQGC20220313_DW.start_time_roll = px42LoopCtrQGC20220313_DW.t;
     px42LoopCtrQGC20220313_DW.Subsystem_SubsysRanBC_m = 4;
@@ -909,22 +865,22 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
 
   px42LoopCtrQGC20220313_PrevZCX.Subsystem_Trig_ZCE_j = rtb_LogicalOperator;
 
-  // End of Outputs for SubSystem: '<S30>/Subsystem'
+  // End of Outputs for SubSystem: '<S29>/Subsystem'
 
-  // Gain: '<S15>/Gain2' incorporates:
-  //   DiscreteIntegrator: '<S15>/Discrete-Time Integrator'
+  // Gain: '<S14>/Gain2' incorporates:
+  //   DiscreteIntegrator: '<S14>/Discrete-Time Integrator'
 
   px42LoopCtrQGC20220313_B.rolldegree = px42LoopCtrQGC20220313_P.Gain2_Gain_c *
     px42LoopCtrQGC20220313_DW.DiscreteTimeIntegrator_DSTATE;
 
-  // Switch: '<S15>/Switch' incorporates:
-  //   Constant: '<S15>/Constant3'
-  //   DataStoreRead: '<S15>/Data Store Read'
-  //   DataStoreRead: '<S15>/Data Store Read1'
-  //   DataStoreRead: '<S15>/Data Store Read2'
-  //   Gain: '<S15>/1//J'
-  //   Gain: '<S15>/k//J'
-  //   ZeroOrderHold: '<S15>/Zero-Order Hold1'
+  // Switch: '<S14>/Switch' incorporates:
+  //   Constant: '<S14>/Constant3'
+  //   DataStoreRead: '<S14>/Data Store Read'
+  //   DataStoreRead: '<S14>/Data Store Read1'
+  //   DataStoreRead: '<S14>/Data Store Read2'
+  //   Gain: '<S14>/1//J'
+  //   Gain: '<S14>/k//J'
+  //   ZeroOrderHold: '<S14>/Zero-Order Hold1'
 
   if (px42LoopCtrQGC20220313_DW.observer_flag) {
     px42LoopCtrQGC20220313_B.rtb_DataTypeConversion3_idx_0 =
@@ -942,40 +898,40 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
       px42LoopCtrQGC20220313_P.Constant3_Value_d;
   }
 
-  // End of Switch: '<S15>/Switch'
+  // End of Switch: '<S14>/Switch'
 
-  // Sum: '<S15>/Add1' incorporates:
-  //   DiscreteIntegrator: '<S15>/Discrete-Time Integrator'
+  // Sum: '<S14>/Add1' incorporates:
+  //   DiscreteIntegrator: '<S14>/Discrete-Time Integrator'
 
   px42LoopCtrQGC20220313_B.Abs6 =
     px42LoopCtrQGC20220313_B.rtb_DataTypeConversion3_idx_2 -
     px42LoopCtrQGC20220313_DW.DiscreteTimeIntegrator_DSTATE;
 
-  // Abs: '<S15>/Abs3' incorporates:
-  //   Abs: '<S15>/Abs4'
-  //   Abs: '<S15>/Abs5'
-  //   Abs: '<S15>/Abs6'
+  // Abs: '<S14>/Abs3' incorporates:
+  //   Abs: '<S14>/Abs4'
+  //   Abs: '<S14>/Abs5'
+  //   Abs: '<S14>/Abs6'
 
   px42LoopCtrQGC20220313_B.z2_l = fabs(px42LoopCtrQGC20220313_B.Abs6);
 
-  // Sum: '<S15>/Add7' incorporates:
-  //   Constant: '<S15>/Constant1'
-  //   Sum: '<S15>/Add13'
-  //   Sum: '<S15>/Add18'
+  // Sum: '<S14>/Add7' incorporates:
+  //   Constant: '<S14>/Constant1'
+  //   Sum: '<S14>/Add13'
+  //   Sum: '<S14>/Add18'
 
   px42LoopCtrQGC20220313_B.lambda4_h =
     px42LoopCtrQGC20220313_P.Constant1_Value_f + px42LoopCtrQGC20220313_B.Abs6;
 
-  // Sum: '<S15>/Add6' incorporates:
-  //   Constant: '<S15>/Constant1'
-  //   Sum: '<S15>/Add12'
-  //   Sum: '<S15>/Add17'
+  // Sum: '<S14>/Add6' incorporates:
+  //   Constant: '<S14>/Constant1'
+  //   Sum: '<S14>/Add12'
+  //   Sum: '<S14>/Add17'
 
   u0_tmp = px42LoopCtrQGC20220313_B.Abs6 -
     px42LoopCtrQGC20220313_P.Constant1_Value_f;
 
-  // Saturate: '<S15>/Saturation10' incorporates:
-  //   Sum: '<S15>/Add7'
+  // Saturate: '<S14>/Saturation10' incorporates:
+  //   Sum: '<S14>/Add7'
 
   if (px42LoopCtrQGC20220313_B.lambda4_h >
       px42LoopCtrQGC20220313_P.Saturation10_UpperSat) {
@@ -989,10 +945,10 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
     px42LoopCtrQGC20220313_B.Product6_a = px42LoopCtrQGC20220313_B.lambda4_h;
   }
 
-  // End of Saturate: '<S15>/Saturation10'
+  // End of Saturate: '<S14>/Saturation10'
 
-  // Saturate: '<S15>/Saturation11' incorporates:
-  //   Sum: '<S15>/Add6'
+  // Saturate: '<S14>/Saturation11' incorporates:
+  //   Sum: '<S14>/Add6'
 
   if (u0_tmp > px42LoopCtrQGC20220313_P.Saturation11_UpperSat) {
     px42LoopCtrQGC20220313_B.Product5_l =
@@ -1004,16 +960,16 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
     px42LoopCtrQGC20220313_B.Product5_l = u0_tmp;
   }
 
-  // End of Saturate: '<S15>/Saturation11'
+  // End of Saturate: '<S14>/Saturation11'
 
-  // Gain: '<S15>/Gain' incorporates:
-  //   Sum: '<S15>/Add8'
+  // Gain: '<S14>/Gain' incorporates:
+  //   Sum: '<S14>/Add8'
 
   px42LoopCtrQGC20220313_B.roll_hat_e = (px42LoopCtrQGC20220313_B.Product6_a -
     px42LoopCtrQGC20220313_B.Product5_l) * px42LoopCtrQGC20220313_P.Gain_Gain_ml;
 
-  // Fcn: '<S15>/Fcn3' incorporates:
-  //   Constant: '<S15>/Constant1'
+  // Fcn: '<S14>/Fcn3' incorporates:
+  //   Constant: '<S14>/Constant1'
 
   if (px42LoopCtrQGC20220313_P.Constant1_Value_f < 0.0) {
     px42LoopCtrQGC20220313_B.fcn5 = -rt_powd_snf
@@ -1023,13 +979,13 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
       (px42LoopCtrQGC20220313_P.Constant1_Value_f, -0.5);
   }
 
-  // End of Fcn: '<S15>/Fcn3'
+  // End of Fcn: '<S14>/Fcn3'
 
-  // Product: '<S15>/Product3'
+  // Product: '<S14>/Product3'
   px42LoopCtrQGC20220313_B.Add3 = px42LoopCtrQGC20220313_B.fcn5 *
     px42LoopCtrQGC20220313_B.roll_hat_e * px42LoopCtrQGC20220313_B.Abs6;
 
-  // Saturate: '<S15>/Saturation8'
+  // Saturate: '<S14>/Saturation8'
   if (px42LoopCtrQGC20220313_B.Abs6 >
       px42LoopCtrQGC20220313_P.Saturation8_UpperSat) {
     px42LoopCtrQGC20220313_B.Product2_d =
@@ -1042,20 +998,20 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
     px42LoopCtrQGC20220313_B.Product2_d = px42LoopCtrQGC20220313_B.Abs6;
   }
 
-  // End of Saturate: '<S15>/Saturation8'
+  // End of Saturate: '<S14>/Saturation8'
 
-  // Product: '<S15>/Product4' incorporates:
-  //   Abs: '<S15>/Abs3'
-  //   Constant: '<S15>/Constant2'
-  //   Fcn: '<S15>/Fcn4'
-  //   Sum: '<S15>/Add10'
+  // Product: '<S14>/Product4' incorporates:
+  //   Abs: '<S14>/Abs3'
+  //   Constant: '<S14>/Constant2'
+  //   Fcn: '<S14>/Fcn4'
+  //   Sum: '<S14>/Add10'
 
   px42LoopCtrQGC20220313_B.Product4 = rt_powd_snf(px42LoopCtrQGC20220313_B.z2_l,
     0.5) * px42LoopCtrQGC20220313_B.Product2_d *
     (px42LoopCtrQGC20220313_P.Constant2_Value -
      px42LoopCtrQGC20220313_B.roll_hat_e);
 
-  // Saturate: '<S15>/Saturation13'
+  // Saturate: '<S14>/Saturation13'
   if (px42LoopCtrQGC20220313_B.lambda4_h >
       px42LoopCtrQGC20220313_P.Saturation13_UpperSat) {
     px42LoopCtrQGC20220313_B.Product6_a =
@@ -1068,9 +1024,9 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
     px42LoopCtrQGC20220313_B.Product6_a = px42LoopCtrQGC20220313_B.lambda4_h;
   }
 
-  // End of Saturate: '<S15>/Saturation13'
+  // End of Saturate: '<S14>/Saturation13'
 
-  // Saturate: '<S15>/Saturation9'
+  // Saturate: '<S14>/Saturation9'
   if (u0_tmp > px42LoopCtrQGC20220313_P.Saturation9_UpperSat) {
     px42LoopCtrQGC20220313_B.Product5_l =
       px42LoopCtrQGC20220313_P.Saturation9_UpperSat;
@@ -1081,16 +1037,16 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
     px42LoopCtrQGC20220313_B.Product5_l = u0_tmp;
   }
 
-  // End of Saturate: '<S15>/Saturation9'
+  // End of Saturate: '<S14>/Saturation9'
 
-  // Gain: '<S15>/Gain1' incorporates:
-  //   Sum: '<S15>/Add14'
+  // Gain: '<S14>/Gain1' incorporates:
+  //   Sum: '<S14>/Add14'
 
   px42LoopCtrQGC20220313_B.roll_hat_e = (px42LoopCtrQGC20220313_B.Product6_a -
     px42LoopCtrQGC20220313_B.Product5_l) * px42LoopCtrQGC20220313_P.Gain1_Gain_a;
 
-  // Fcn: '<S15>/Fcn6' incorporates:
-  //   Constant: '<S15>/Constant1'
+  // Fcn: '<S14>/Fcn6' incorporates:
+  //   Constant: '<S14>/Constant1'
 
   if (px42LoopCtrQGC20220313_P.Constant1_Value_f < 0.0) {
     px42LoopCtrQGC20220313_B.fcn5 = -rt_powd_snf
@@ -1100,13 +1056,13 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
       (px42LoopCtrQGC20220313_P.Constant1_Value_f, -0.9375);
   }
 
-  // End of Fcn: '<S15>/Fcn6'
+  // End of Fcn: '<S14>/Fcn6'
 
-  // Product: '<S15>/Product6'
+  // Product: '<S14>/Product6'
   px42LoopCtrQGC20220313_B.Product6 = px42LoopCtrQGC20220313_B.fcn5 *
     px42LoopCtrQGC20220313_B.roll_hat_e * px42LoopCtrQGC20220313_B.Abs6;
 
-  // Saturate: '<S15>/Saturation12'
+  // Saturate: '<S14>/Saturation12'
   if (px42LoopCtrQGC20220313_B.Abs6 >
       px42LoopCtrQGC20220313_P.Saturation12_UpperSat) {
     px42LoopCtrQGC20220313_B.Product2_d =
@@ -1119,19 +1075,19 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
     px42LoopCtrQGC20220313_B.Product2_d = px42LoopCtrQGC20220313_B.Abs6;
   }
 
-  // End of Saturate: '<S15>/Saturation12'
+  // End of Saturate: '<S14>/Saturation12'
 
-  // Product: '<S15>/Product5' incorporates:
-  //   Constant: '<S15>/Constant4'
-  //   Fcn: '<S15>/Fcn5'
-  //   Sum: '<S15>/Add11'
+  // Product: '<S14>/Product5' incorporates:
+  //   Constant: '<S14>/Constant4'
+  //   Fcn: '<S14>/Fcn5'
+  //   Sum: '<S14>/Add11'
 
   px42LoopCtrQGC20220313_B.roll_hat = rt_powd_snf(px42LoopCtrQGC20220313_B.z2_l,
     0.0625) * px42LoopCtrQGC20220313_B.Product2_d *
     (px42LoopCtrQGC20220313_P.Constant4_Value -
      px42LoopCtrQGC20220313_B.roll_hat_e);
 
-  // Saturate: '<S15>/Saturation16'
+  // Saturate: '<S14>/Saturation16'
   if (px42LoopCtrQGC20220313_B.lambda4_h >
       px42LoopCtrQGC20220313_P.Saturation16_UpperSat) {
     px42LoopCtrQGC20220313_B.lambda4_h =
@@ -1142,24 +1098,24 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
       px42LoopCtrQGC20220313_P.Saturation16_LowerSat;
   }
 
-  // End of Saturate: '<S15>/Saturation16'
+  // End of Saturate: '<S14>/Saturation16'
 
-  // Saturate: '<S15>/Saturation14'
+  // Saturate: '<S14>/Saturation14'
   if (u0_tmp > px42LoopCtrQGC20220313_P.Saturation14_UpperSat) {
     u0_tmp = px42LoopCtrQGC20220313_P.Saturation14_UpperSat;
   } else if (u0_tmp < px42LoopCtrQGC20220313_P.Saturation14_LowerSat) {
     u0_tmp = px42LoopCtrQGC20220313_P.Saturation14_LowerSat;
   }
 
-  // End of Saturate: '<S15>/Saturation14'
+  // End of Saturate: '<S14>/Saturation14'
 
-  // Gain: '<S15>/Gain3' incorporates:
-  //   Sum: '<S15>/Add19'
+  // Gain: '<S14>/Gain3' incorporates:
+  //   Sum: '<S14>/Add19'
 
   px42LoopCtrQGC20220313_B.roll_hat_e = (px42LoopCtrQGC20220313_B.lambda4_h -
     u0_tmp) * px42LoopCtrQGC20220313_P.Gain3_Gain;
 
-  // Saturate: '<S15>/Saturation1'
+  // Saturate: '<S14>/Saturation1'
   if (px42LoopCtrQGC20220313_B.Abs6 >
       px42LoopCtrQGC20220313_P.Saturation1_UpperSat) {
     px42LoopCtrQGC20220313_B.Product2_d =
@@ -1172,10 +1128,10 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
     px42LoopCtrQGC20220313_B.Product2_d = px42LoopCtrQGC20220313_B.Abs6;
   }
 
-  // End of Saturate: '<S15>/Saturation1'
+  // End of Saturate: '<S14>/Saturation1'
 
-  // Fcn: '<S15>/Fcn7' incorporates:
-  //   Constant: '<S15>/Constant1'
+  // Fcn: '<S14>/Fcn7' incorporates:
+  //   Constant: '<S14>/Constant1'
 
   if (px42LoopCtrQGC20220313_P.Constant1_Value_f < 0.0) {
     px42LoopCtrQGC20220313_B.fcn5 = -rt_powd_snf
@@ -1185,9 +1141,9 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
       (px42LoopCtrQGC20220313_P.Constant1_Value_f, -0.75);
   }
 
-  // End of Fcn: '<S15>/Fcn7'
+  // End of Fcn: '<S14>/Fcn7'
 
-  // Saturate: '<S15>/Saturation15'
+  // Saturate: '<S14>/Saturation15'
   if (px42LoopCtrQGC20220313_B.Abs6 >
       px42LoopCtrQGC20220313_P.Saturation15_UpperSat) {
     px42LoopCtrQGC20220313_B.lambda1_a =
@@ -1200,20 +1156,20 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
     px42LoopCtrQGC20220313_B.lambda1_a = px42LoopCtrQGC20220313_B.Abs6;
   }
 
-  // End of Saturate: '<S15>/Saturation15'
+  // End of Saturate: '<S14>/Saturation15'
 
-  // Sum: '<S15>/Add2' incorporates:
-  //   Constant: '<S15>/Constant6'
-  //   DiscreteIntegrator: '<S15>/Discrete-Time Integrator3'
-  //   Fcn: '<S15>/Fcn8'
-  //   Gain: '<S15>/Gain6'
-  //   Gain: '<S15>/l2'
-  //   Gain: '<S15>/lambda2'
-  //   Product: '<S15>/Product7'
-  //   Product: '<S15>/Product8'
-  //   Sum: '<S15>/Add16'
-  //   Sum: '<S15>/Add20'
-  //   Sum: '<S15>/Add3'
+  // Sum: '<S14>/Add2' incorporates:
+  //   Constant: '<S14>/Constant6'
+  //   DiscreteIntegrator: '<S14>/Discrete-Time Integrator3'
+  //   Fcn: '<S14>/Fcn8'
+  //   Gain: '<S14>/Gain6'
+  //   Gain: '<S14>/l2'
+  //   Gain: '<S14>/lambda2'
+  //   Product: '<S14>/Product7'
+  //   Product: '<S14>/Product8'
+  //   Sum: '<S14>/Add16'
+  //   Sum: '<S14>/Add20'
+  //   Sum: '<S14>/Add3'
 
   px42LoopCtrQGC20220313_B.z2_l = (((px42LoopCtrQGC20220313_P.lambda2_Gain *
     px42LoopCtrQGC20220313_B.Abs6 + px42LoopCtrQGC20220313_P.l2_Gain *
@@ -1228,21 +1184,21 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
       px42LoopCtrQGC20220313_B.roll_hat_e)) *
     px42LoopCtrQGC20220313_P.Gain6_Gain;
 
-  // Gain: '<S13>/Gain2' incorporates:
-  //   DiscreteIntegrator: '<S13>/Discrete-Time Integrator'
+  // Gain: '<S12>/Gain2' incorporates:
+  //   DiscreteIntegrator: '<S12>/Discrete-Time Integrator'
 
   px42LoopCtrQGC20220313_B.rolldegree_l = px42LoopCtrQGC20220313_P.Gain2_Gain_g *
     px42LoopCtrQGC20220313_DW.DiscreteTimeIntegrator_DSTATE_p;
 
-  // Switch: '<S13>/Switch' incorporates:
-  //   Constant: '<S13>/Constant3'
-  //   DataStoreRead: '<S13>/Data Store Read'
-  //   DataStoreRead: '<S13>/Data Store Read1'
-  //   DataStoreRead: '<S13>/Data Store Read2'
+  // Switch: '<S12>/Switch' incorporates:
+  //   Constant: '<S12>/Constant3'
+  //   DataStoreRead: '<S12>/Data Store Read'
+  //   DataStoreRead: '<S12>/Data Store Read1'
+  //   DataStoreRead: '<S12>/Data Store Read2'
   //   DataStoreWrite: '<Root>/Data Store Write12'
-  //   Gain: '<S13>/1//J'
-  //   Gain: '<S13>/k//J'
-  //   ZeroOrderHold: '<S13>/Zero-Order Hold1'
+  //   Gain: '<S12>/1//J'
+  //   Gain: '<S12>/k//J'
+  //   ZeroOrderHold: '<S12>/Zero-Order Hold1'
 
   if (px42LoopCtrQGC20220313_DW.observer_flag) {
     px42LoopCtrQGC20220313_B.rtb_DataTypeConversion3_idx_0 =
@@ -1261,23 +1217,23 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
       px42LoopCtrQGC20220313_P.Constant3_Value;
   }
 
-  // End of Switch: '<S13>/Switch'
+  // End of Switch: '<S12>/Switch'
 
-  // Sum: '<S13>/Add1' incorporates:
-  //   DiscreteIntegrator: '<S13>/Discrete-Time Integrator'
+  // Sum: '<S12>/Add1' incorporates:
+  //   DiscreteIntegrator: '<S12>/Discrete-Time Integrator'
 
   px42LoopCtrQGC20220313_B.Product2_d =
     px42LoopCtrQGC20220313_B.rtb_DataTypeConversion3_idx_2 -
     px42LoopCtrQGC20220313_DW.DiscreteTimeIntegrator_DSTATE_p;
 
-  // Abs: '<S13>/Abs3' incorporates:
-  //   Abs: '<S13>/Abs4'
-  //   Abs: '<S13>/Abs5'
-  //   Abs: '<S13>/Abs6'
+  // Abs: '<S12>/Abs3' incorporates:
+  //   Abs: '<S12>/Abs4'
+  //   Abs: '<S12>/Abs5'
+  //   Abs: '<S12>/Abs6'
 
   px42LoopCtrQGC20220313_B.Add2_o = fabs(px42LoopCtrQGC20220313_B.Product2_d);
 
-  // Saturate: '<S13>/Saturation'
+  // Saturate: '<S12>/Saturation'
   if (px42LoopCtrQGC20220313_B.Product2_d >
       px42LoopCtrQGC20220313_P.Saturation_UpperSat_n) {
     px42LoopCtrQGC20220313_B.roll_hat_e =
@@ -1290,31 +1246,31 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
     px42LoopCtrQGC20220313_B.roll_hat_e = px42LoopCtrQGC20220313_B.Product2_d;
   }
 
-  // End of Saturate: '<S13>/Saturation'
+  // End of Saturate: '<S12>/Saturation'
 
-  // Gain: '<S13>/lambda1'
+  // Gain: '<S12>/lambda1'
   px42LoopCtrQGC20220313_B.lambda1_a = px42LoopCtrQGC20220313_P.lambda1_Gain_a *
     px42LoopCtrQGC20220313_B.Product2_d;
 
-  // Sum: '<S13>/Add7' incorporates:
-  //   Constant: '<S13>/Constant1'
-  //   Sum: '<S13>/Add13'
-  //   Sum: '<S13>/Add18'
+  // Sum: '<S12>/Add7' incorporates:
+  //   Constant: '<S12>/Constant1'
+  //   Sum: '<S12>/Add13'
+  //   Sum: '<S12>/Add18'
 
   px42LoopCtrQGC20220313_B.lambda4_h =
     px42LoopCtrQGC20220313_P.Constant1_Value_j +
     px42LoopCtrQGC20220313_B.Product2_d;
 
-  // Sum: '<S13>/Add6' incorporates:
-  //   Constant: '<S13>/Constant1'
-  //   Sum: '<S13>/Add12'
-  //   Sum: '<S13>/Add17'
+  // Sum: '<S12>/Add6' incorporates:
+  //   Constant: '<S12>/Constant1'
+  //   Sum: '<S12>/Add12'
+  //   Sum: '<S12>/Add17'
 
   u0_tmp = px42LoopCtrQGC20220313_B.Product2_d -
     px42LoopCtrQGC20220313_P.Constant1_Value_j;
 
-  // Saturate: '<S13>/Saturation10' incorporates:
-  //   Sum: '<S13>/Add7'
+  // Saturate: '<S12>/Saturation10' incorporates:
+  //   Sum: '<S12>/Add7'
 
   if (px42LoopCtrQGC20220313_B.lambda4_h >
       px42LoopCtrQGC20220313_P.Saturation10_UpperSat_o) {
@@ -1328,10 +1284,10 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
     px42LoopCtrQGC20220313_B.Product6_a = px42LoopCtrQGC20220313_B.lambda4_h;
   }
 
-  // End of Saturate: '<S13>/Saturation10'
+  // End of Saturate: '<S12>/Saturation10'
 
-  // Saturate: '<S13>/Saturation11' incorporates:
-  //   Sum: '<S13>/Add6'
+  // Saturate: '<S12>/Saturation11' incorporates:
+  //   Sum: '<S12>/Add6'
 
   if (u0_tmp > px42LoopCtrQGC20220313_P.Saturation11_UpperSat_p) {
     px42LoopCtrQGC20220313_B.Product5_l =
@@ -1343,16 +1299,16 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
     px42LoopCtrQGC20220313_B.Product5_l = u0_tmp;
   }
 
-  // End of Saturate: '<S13>/Saturation11'
+  // End of Saturate: '<S12>/Saturation11'
 
-  // Gain: '<S13>/Gain' incorporates:
-  //   Sum: '<S13>/Add8'
+  // Gain: '<S12>/Gain' incorporates:
+  //   Sum: '<S12>/Add8'
 
   px42LoopCtrQGC20220313_B.roll_hat_k = (px42LoopCtrQGC20220313_B.Product6_a -
     px42LoopCtrQGC20220313_B.Product5_l) * px42LoopCtrQGC20220313_P.Gain_Gain_g;
 
-  // Fcn: '<S13>/Fcn3' incorporates:
-  //   Constant: '<S13>/Constant1'
+  // Fcn: '<S12>/Fcn3' incorporates:
+  //   Constant: '<S12>/Constant1'
 
   if (px42LoopCtrQGC20220313_P.Constant1_Value_j < 0.0) {
     px42LoopCtrQGC20220313_B.fcn5 = -rt_powd_snf
@@ -1362,13 +1318,13 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
       (px42LoopCtrQGC20220313_P.Constant1_Value_j, -0.5);
   }
 
-  // End of Fcn: '<S13>/Fcn3'
+  // End of Fcn: '<S12>/Fcn3'
 
-  // Product: '<S13>/Product3'
+  // Product: '<S12>/Product3'
   px42LoopCtrQGC20220313_B.Product3_a = px42LoopCtrQGC20220313_B.fcn5 *
     px42LoopCtrQGC20220313_B.roll_hat_k * px42LoopCtrQGC20220313_B.Product2_d;
 
-  // Saturate: '<S13>/Saturation8'
+  // Saturate: '<S12>/Saturation8'
   if (px42LoopCtrQGC20220313_B.Product2_d >
       px42LoopCtrQGC20220313_P.Saturation8_UpperSat_g) {
     px42LoopCtrQGC20220313_B.lambda4_n =
@@ -1381,20 +1337,20 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
     px42LoopCtrQGC20220313_B.lambda4_n = px42LoopCtrQGC20220313_B.Product2_d;
   }
 
-  // End of Saturate: '<S13>/Saturation8'
+  // End of Saturate: '<S12>/Saturation8'
 
-  // Product: '<S13>/Product4' incorporates:
-  //   Abs: '<S13>/Abs3'
-  //   Constant: '<S13>/Constant2'
-  //   Fcn: '<S13>/Fcn4'
-  //   Sum: '<S13>/Add10'
+  // Product: '<S12>/Product4' incorporates:
+  //   Abs: '<S12>/Abs3'
+  //   Constant: '<S12>/Constant2'
+  //   Fcn: '<S12>/Fcn4'
+  //   Sum: '<S12>/Add10'
 
   px42LoopCtrQGC20220313_B.Product4_k = rt_powd_snf
     (px42LoopCtrQGC20220313_B.Add2_o, 0.5) * px42LoopCtrQGC20220313_B.lambda4_n *
     (px42LoopCtrQGC20220313_P.Constant2_Value_h -
      px42LoopCtrQGC20220313_B.roll_hat_k);
 
-  // Saturate: '<S13>/Saturation13'
+  // Saturate: '<S12>/Saturation13'
   if (px42LoopCtrQGC20220313_B.lambda4_h >
       px42LoopCtrQGC20220313_P.Saturation13_UpperSat_i) {
     px42LoopCtrQGC20220313_B.Product6_a =
@@ -1407,9 +1363,9 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
     px42LoopCtrQGC20220313_B.Product6_a = px42LoopCtrQGC20220313_B.lambda4_h;
   }
 
-  // End of Saturate: '<S13>/Saturation13'
+  // End of Saturate: '<S12>/Saturation13'
 
-  // Saturate: '<S13>/Saturation9'
+  // Saturate: '<S12>/Saturation9'
   if (u0_tmp > px42LoopCtrQGC20220313_P.Saturation9_UpperSat_i) {
     px42LoopCtrQGC20220313_B.Product5_l =
       px42LoopCtrQGC20220313_P.Saturation9_UpperSat_i;
@@ -1420,16 +1376,16 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
     px42LoopCtrQGC20220313_B.Product5_l = u0_tmp;
   }
 
-  // End of Saturate: '<S13>/Saturation9'
+  // End of Saturate: '<S12>/Saturation9'
 
-  // Gain: '<S13>/Gain1' incorporates:
-  //   Sum: '<S13>/Add14'
+  // Gain: '<S12>/Gain1' incorporates:
+  //   Sum: '<S12>/Add14'
 
   px42LoopCtrQGC20220313_B.roll_hat_k = (px42LoopCtrQGC20220313_B.Product6_a -
     px42LoopCtrQGC20220313_B.Product5_l) * px42LoopCtrQGC20220313_P.Gain1_Gain_d;
 
-  // Fcn: '<S13>/Fcn6' incorporates:
-  //   Constant: '<S13>/Constant1'
+  // Fcn: '<S12>/Fcn6' incorporates:
+  //   Constant: '<S12>/Constant1'
 
   if (px42LoopCtrQGC20220313_P.Constant1_Value_j < 0.0) {
     px42LoopCtrQGC20220313_B.fcn5 = -rt_powd_snf
@@ -1439,13 +1395,13 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
       (px42LoopCtrQGC20220313_P.Constant1_Value_j, -0.9375);
   }
 
-  // End of Fcn: '<S13>/Fcn6'
+  // End of Fcn: '<S12>/Fcn6'
 
-  // Product: '<S13>/Product6'
+  // Product: '<S12>/Product6'
   px42LoopCtrQGC20220313_B.Product6_i = px42LoopCtrQGC20220313_B.fcn5 *
     px42LoopCtrQGC20220313_B.roll_hat_k * px42LoopCtrQGC20220313_B.Product2_d;
 
-  // Saturate: '<S13>/Saturation12'
+  // Saturate: '<S12>/Saturation12'
   if (px42LoopCtrQGC20220313_B.Product2_d >
       px42LoopCtrQGC20220313_P.Saturation12_UpperSat_c) {
     px42LoopCtrQGC20220313_B.lambda4_n =
@@ -1458,12 +1414,12 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
     px42LoopCtrQGC20220313_B.lambda4_n = px42LoopCtrQGC20220313_B.Product2_d;
   }
 
-  // End of Saturate: '<S13>/Saturation12'
+  // End of Saturate: '<S12>/Saturation12'
 
-  // Product: '<S13>/Product5' incorporates:
-  //   Constant: '<S13>/Constant4'
-  //   Fcn: '<S13>/Fcn5'
-  //   Sum: '<S13>/Add11'
+  // Product: '<S12>/Product5' incorporates:
+  //   Constant: '<S12>/Constant4'
+  //   Fcn: '<S12>/Fcn5'
+  //   Sum: '<S12>/Add11'
 
   px42LoopCtrQGC20220313_B.Product5_b = rt_powd_snf
     (px42LoopCtrQGC20220313_B.Add2_o, 0.0625) *
@@ -1471,7 +1427,7 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
     (px42LoopCtrQGC20220313_P.Constant4_Value_n -
      px42LoopCtrQGC20220313_B.roll_hat_k);
 
-  // Saturate: '<S13>/Saturation16'
+  // Saturate: '<S12>/Saturation16'
   if (px42LoopCtrQGC20220313_B.lambda4_h >
       px42LoopCtrQGC20220313_P.Saturation16_UpperSat_l) {
     px42LoopCtrQGC20220313_B.lambda4_h =
@@ -1482,24 +1438,24 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
       px42LoopCtrQGC20220313_P.Saturation16_LowerSat_g;
   }
 
-  // End of Saturate: '<S13>/Saturation16'
+  // End of Saturate: '<S12>/Saturation16'
 
-  // Saturate: '<S13>/Saturation14'
+  // Saturate: '<S12>/Saturation14'
   if (u0_tmp > px42LoopCtrQGC20220313_P.Saturation14_UpperSat_l) {
     u0_tmp = px42LoopCtrQGC20220313_P.Saturation14_UpperSat_l;
   } else if (u0_tmp < px42LoopCtrQGC20220313_P.Saturation14_LowerSat_b) {
     u0_tmp = px42LoopCtrQGC20220313_P.Saturation14_LowerSat_b;
   }
 
-  // End of Saturate: '<S13>/Saturation14'
+  // End of Saturate: '<S12>/Saturation14'
 
-  // Gain: '<S13>/Gain3' incorporates:
-  //   Sum: '<S13>/Add19'
+  // Gain: '<S12>/Gain3' incorporates:
+  //   Sum: '<S12>/Add19'
 
   px42LoopCtrQGC20220313_B.roll_hat_k = (px42LoopCtrQGC20220313_B.lambda4_h -
     u0_tmp) * px42LoopCtrQGC20220313_P.Gain3_Gain_l;
 
-  // Saturate: '<S13>/Saturation1'
+  // Saturate: '<S12>/Saturation1'
   if (px42LoopCtrQGC20220313_B.Product2_d >
       px42LoopCtrQGC20220313_P.Saturation1_UpperSat_a) {
     px42LoopCtrQGC20220313_B.lambda4_n =
@@ -1512,10 +1468,10 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
     px42LoopCtrQGC20220313_B.lambda4_n = px42LoopCtrQGC20220313_B.Product2_d;
   }
 
-  // End of Saturate: '<S13>/Saturation1'
+  // End of Saturate: '<S12>/Saturation1'
 
-  // Fcn: '<S13>/Fcn7' incorporates:
-  //   Constant: '<S13>/Constant1'
+  // Fcn: '<S12>/Fcn7' incorporates:
+  //   Constant: '<S12>/Constant1'
 
   if (px42LoopCtrQGC20220313_P.Constant1_Value_j < 0.0) {
     px42LoopCtrQGC20220313_B.fcn5 = -rt_powd_snf
@@ -1525,9 +1481,9 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
       (px42LoopCtrQGC20220313_P.Constant1_Value_j, -0.75);
   }
 
-  // End of Fcn: '<S13>/Fcn7'
+  // End of Fcn: '<S12>/Fcn7'
 
-  // Saturate: '<S13>/Saturation15'
+  // Saturate: '<S12>/Saturation15'
   if (px42LoopCtrQGC20220313_B.Product2_d >
       px42LoopCtrQGC20220313_P.Saturation15_UpperSat_j) {
     px42LoopCtrQGC20220313_B.rtb_DataTypeConversion3_idx_2 =
@@ -1541,20 +1497,20 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
       px42LoopCtrQGC20220313_B.Product2_d;
   }
 
-  // End of Saturate: '<S13>/Saturation15'
+  // End of Saturate: '<S12>/Saturation15'
 
-  // Sum: '<S13>/Add2' incorporates:
-  //   Constant: '<S13>/Constant6'
-  //   DiscreteIntegrator: '<S13>/Discrete-Time Integrator3'
-  //   Fcn: '<S13>/Fcn8'
-  //   Gain: '<S13>/Gain6'
-  //   Gain: '<S13>/l2'
-  //   Gain: '<S13>/lambda2'
-  //   Product: '<S13>/Product7'
-  //   Product: '<S13>/Product8'
-  //   Sum: '<S13>/Add16'
-  //   Sum: '<S13>/Add20'
-  //   Sum: '<S13>/Add3'
+  // Sum: '<S12>/Add2' incorporates:
+  //   Constant: '<S12>/Constant6'
+  //   DiscreteIntegrator: '<S12>/Discrete-Time Integrator3'
+  //   Fcn: '<S12>/Fcn8'
+  //   Gain: '<S12>/Gain6'
+  //   Gain: '<S12>/l2'
+  //   Gain: '<S12>/lambda2'
+  //   Product: '<S12>/Product7'
+  //   Product: '<S12>/Product8'
+  //   Sum: '<S12>/Add16'
+  //   Sum: '<S12>/Add20'
+  //   Sum: '<S12>/Add3'
 
   px42LoopCtrQGC20220313_B.Add2_o = (((px42LoopCtrQGC20220313_P.lambda2_Gain_j *
     px42LoopCtrQGC20220313_B.Product2_d + px42LoopCtrQGC20220313_P.l2_Gain_l *
@@ -1570,7 +1526,7 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
       px42LoopCtrQGC20220313_B.roll_hat_k)) *
     px42LoopCtrQGC20220313_P.Gain6_Gain_e;
 
-  // Saturate: '<S13>/Saturation3'
+  // Saturate: '<S12>/Saturation3'
   if (px42LoopCtrQGC20220313_B.Product2_d >
       px42LoopCtrQGC20220313_P.Saturation3_UpperSat_m) {
     px42LoopCtrQGC20220313_B.roll_hat_k =
@@ -1583,27 +1539,27 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
     px42LoopCtrQGC20220313_B.roll_hat_k = px42LoopCtrQGC20220313_B.Product2_d;
   }
 
-  // End of Saturate: '<S13>/Saturation3'
+  // End of Saturate: '<S12>/Saturation3'
 
-  // Gain: '<S13>/lambda4'
+  // Gain: '<S12>/lambda4'
   px42LoopCtrQGC20220313_B.lambda4_n = px42LoopCtrQGC20220313_P.lambda4_Gain_a *
     px42LoopCtrQGC20220313_B.Product2_d;
 
-  // Gain: '<S14>/Gain2' incorporates:
-  //   DiscreteIntegrator: '<S14>/Discrete-Time Integrator'
+  // Gain: '<S13>/Gain2' incorporates:
+  //   DiscreteIntegrator: '<S13>/Discrete-Time Integrator'
 
   px42LoopCtrQGC20220313_B.rolldegree_c = px42LoopCtrQGC20220313_P.Gain2_Gain_p *
     px42LoopCtrQGC20220313_DW.DiscreteTimeIntegrator_DSTATE_f;
 
-  // Switch: '<S14>/Switch' incorporates:
-  //   Constant: '<S14>/Constant3'
-  //   DataStoreRead: '<S14>/Data Store Read'
-  //   DataStoreRead: '<S14>/Data Store Read1'
-  //   DataStoreRead: '<S14>/Data Store Read2'
+  // Switch: '<S13>/Switch' incorporates:
+  //   Constant: '<S13>/Constant3'
+  //   DataStoreRead: '<S13>/Data Store Read'
+  //   DataStoreRead: '<S13>/Data Store Read1'
+  //   DataStoreRead: '<S13>/Data Store Read2'
   //   DataStoreWrite: '<Root>/Data Store Write13'
-  //   Gain: '<S14>/1//J'
-  //   Gain: '<S14>/k//J'
-  //   ZeroOrderHold: '<S14>/Zero-Order Hold1'
+  //   Gain: '<S13>/1//J'
+  //   Gain: '<S13>/k//J'
+  //   ZeroOrderHold: '<S13>/Zero-Order Hold1'
 
   if (px42LoopCtrQGC20220313_DW.observer_flag) {
     px42LoopCtrQGC20220313_B.rtb_DataTypeConversion3_idx_0 =
@@ -1622,23 +1578,23 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
       px42LoopCtrQGC20220313_P.Constant3_Value_a;
   }
 
-  // End of Switch: '<S14>/Switch'
+  // End of Switch: '<S13>/Switch'
 
-  // Sum: '<S14>/Add1' incorporates:
-  //   DiscreteIntegrator: '<S14>/Discrete-Time Integrator'
+  // Sum: '<S13>/Add1' incorporates:
+  //   DiscreteIntegrator: '<S13>/Discrete-Time Integrator'
 
   px42LoopCtrQGC20220313_B.Product1_p =
     px42LoopCtrQGC20220313_B.rtb_DataTypeConversion3_idx_2 -
     px42LoopCtrQGC20220313_DW.DiscreteTimeIntegrator_DSTATE_f;
 
-  // Abs: '<S14>/Abs3' incorporates:
-  //   Abs: '<S14>/Abs4'
-  //   Abs: '<S14>/Abs5'
-  //   Abs: '<S14>/Abs6'
+  // Abs: '<S13>/Abs3' incorporates:
+  //   Abs: '<S13>/Abs4'
+  //   Abs: '<S13>/Abs5'
+  //   Abs: '<S13>/Abs6'
 
   px42LoopCtrQGC20220313_B.Product2_d = fabs(px42LoopCtrQGC20220313_B.Product1_p);
 
-  // Saturate: '<S14>/Saturation'
+  // Saturate: '<S13>/Saturation'
   if (px42LoopCtrQGC20220313_B.Product1_p >
       px42LoopCtrQGC20220313_P.Saturation_UpperSat_n1) {
     px42LoopCtrQGC20220313_B.rtb_DataTypeConversion3_idx_2 =
@@ -1652,31 +1608,31 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
       px42LoopCtrQGC20220313_B.Product1_p;
   }
 
-  // End of Saturate: '<S14>/Saturation'
+  // End of Saturate: '<S13>/Saturation'
 
-  // Gain: '<S14>/lambda1'
+  // Gain: '<S13>/lambda1'
   px42LoopCtrQGC20220313_B.lambda1_e = px42LoopCtrQGC20220313_P.lambda1_Gain_g *
     px42LoopCtrQGC20220313_B.Product1_p;
 
-  // Sum: '<S14>/Add7' incorporates:
-  //   Constant: '<S14>/Constant1'
-  //   Sum: '<S14>/Add13'
-  //   Sum: '<S14>/Add18'
+  // Sum: '<S13>/Add7' incorporates:
+  //   Constant: '<S13>/Constant1'
+  //   Sum: '<S13>/Add13'
+  //   Sum: '<S13>/Add18'
 
   px42LoopCtrQGC20220313_B.lambda4_h =
     px42LoopCtrQGC20220313_P.Constant1_Value_ac +
     px42LoopCtrQGC20220313_B.Product1_p;
 
-  // Sum: '<S14>/Add6' incorporates:
-  //   Constant: '<S14>/Constant1'
-  //   Sum: '<S14>/Add12'
-  //   Sum: '<S14>/Add17'
+  // Sum: '<S13>/Add6' incorporates:
+  //   Constant: '<S13>/Constant1'
+  //   Sum: '<S13>/Add12'
+  //   Sum: '<S13>/Add17'
 
   u0_tmp = px42LoopCtrQGC20220313_B.Product1_p -
     px42LoopCtrQGC20220313_P.Constant1_Value_ac;
 
-  // Saturate: '<S14>/Saturation10' incorporates:
-  //   Sum: '<S14>/Add7'
+  // Saturate: '<S13>/Saturation10' incorporates:
+  //   Sum: '<S13>/Add7'
 
   if (px42LoopCtrQGC20220313_B.lambda4_h >
       px42LoopCtrQGC20220313_P.Saturation10_UpperSat_a) {
@@ -1690,10 +1646,10 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
     px42LoopCtrQGC20220313_B.Product6_a = px42LoopCtrQGC20220313_B.lambda4_h;
   }
 
-  // End of Saturate: '<S14>/Saturation10'
+  // End of Saturate: '<S13>/Saturation10'
 
-  // Saturate: '<S14>/Saturation11' incorporates:
-  //   Sum: '<S14>/Add6'
+  // Saturate: '<S13>/Saturation11' incorporates:
+  //   Sum: '<S13>/Add6'
 
   if (u0_tmp > px42LoopCtrQGC20220313_P.Saturation11_UpperSat_a) {
     px42LoopCtrQGC20220313_B.Product5_l =
@@ -1705,16 +1661,16 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
     px42LoopCtrQGC20220313_B.Product5_l = u0_tmp;
   }
 
-  // End of Saturate: '<S14>/Saturation11'
+  // End of Saturate: '<S13>/Saturation11'
 
-  // Gain: '<S14>/Gain' incorporates:
-  //   Sum: '<S14>/Add8'
+  // Gain: '<S13>/Gain' incorporates:
+  //   Sum: '<S13>/Add8'
 
   px42LoopCtrQGC20220313_B.Product3_i = (px42LoopCtrQGC20220313_B.Product6_a -
     px42LoopCtrQGC20220313_B.Product5_l) * px42LoopCtrQGC20220313_P.Gain_Gain_h;
 
-  // Fcn: '<S14>/Fcn3' incorporates:
-  //   Constant: '<S14>/Constant1'
+  // Fcn: '<S13>/Fcn3' incorporates:
+  //   Constant: '<S13>/Constant1'
 
   if (px42LoopCtrQGC20220313_P.Constant1_Value_ac < 0.0) {
     px42LoopCtrQGC20220313_B.fcn5 = -rt_powd_snf
@@ -1724,41 +1680,41 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
       (px42LoopCtrQGC20220313_P.Constant1_Value_ac, -0.5);
   }
 
-  // End of Fcn: '<S14>/Fcn3'
+  // End of Fcn: '<S13>/Fcn3'
 
-  // Product: '<S14>/Product3'
+  // Product: '<S13>/Product3'
   px42LoopCtrQGC20220313_B.Product3_c = px42LoopCtrQGC20220313_B.fcn5 *
     px42LoopCtrQGC20220313_B.Product3_i * px42LoopCtrQGC20220313_B.Product1_p;
 
-  // Saturate: '<S14>/Saturation8'
+  // Saturate: '<S13>/Saturation8'
   if (px42LoopCtrQGC20220313_B.Product1_p >
       px42LoopCtrQGC20220313_P.Saturation8_UpperSat_c) {
-    px42LoopCtrQGC20220313_B.rtb_Product1_p_p =
+    px42LoopCtrQGC20220313_B.rtb_Product1_p_b =
       px42LoopCtrQGC20220313_P.Saturation8_UpperSat_c;
   } else if (px42LoopCtrQGC20220313_B.Product1_p <
              px42LoopCtrQGC20220313_P.Saturation8_LowerSat_c) {
-    px42LoopCtrQGC20220313_B.rtb_Product1_p_p =
+    px42LoopCtrQGC20220313_B.rtb_Product1_p_b =
       px42LoopCtrQGC20220313_P.Saturation8_LowerSat_c;
   } else {
-    px42LoopCtrQGC20220313_B.rtb_Product1_p_p =
+    px42LoopCtrQGC20220313_B.rtb_Product1_p_b =
       px42LoopCtrQGC20220313_B.Product1_p;
   }
 
-  // End of Saturate: '<S14>/Saturation8'
+  // End of Saturate: '<S13>/Saturation8'
 
-  // Product: '<S14>/Product4' incorporates:
-  //   Abs: '<S14>/Abs3'
-  //   Constant: '<S14>/Constant2'
-  //   Fcn: '<S14>/Fcn4'
-  //   Sum: '<S14>/Add10'
+  // Product: '<S13>/Product4' incorporates:
+  //   Abs: '<S13>/Abs3'
+  //   Constant: '<S13>/Constant2'
+  //   Fcn: '<S13>/Fcn4'
+  //   Sum: '<S13>/Add10'
 
   px42LoopCtrQGC20220313_B.Product4_g = rt_powd_snf
     (px42LoopCtrQGC20220313_B.Product2_d, 0.5) *
-    px42LoopCtrQGC20220313_B.rtb_Product1_p_p *
+    px42LoopCtrQGC20220313_B.rtb_Product1_p_b *
     (px42LoopCtrQGC20220313_P.Constant2_Value_k -
      px42LoopCtrQGC20220313_B.Product3_i);
 
-  // Saturate: '<S14>/Saturation13'
+  // Saturate: '<S13>/Saturation13'
   if (px42LoopCtrQGC20220313_B.lambda4_h >
       px42LoopCtrQGC20220313_P.Saturation13_UpperSat_p) {
     px42LoopCtrQGC20220313_B.Product6_a =
@@ -1771,9 +1727,9 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
     px42LoopCtrQGC20220313_B.Product6_a = px42LoopCtrQGC20220313_B.lambda4_h;
   }
 
-  // End of Saturate: '<S14>/Saturation13'
+  // End of Saturate: '<S13>/Saturation13'
 
-  // Saturate: '<S14>/Saturation9'
+  // Saturate: '<S13>/Saturation9'
   if (u0_tmp > px42LoopCtrQGC20220313_P.Saturation9_UpperSat_d) {
     px42LoopCtrQGC20220313_B.Product5_l =
       px42LoopCtrQGC20220313_P.Saturation9_UpperSat_d;
@@ -1784,16 +1740,16 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
     px42LoopCtrQGC20220313_B.Product5_l = u0_tmp;
   }
 
-  // End of Saturate: '<S14>/Saturation9'
+  // End of Saturate: '<S13>/Saturation9'
 
-  // Gain: '<S14>/Gain1' incorporates:
-  //   Sum: '<S14>/Add14'
+  // Gain: '<S13>/Gain1' incorporates:
+  //   Sum: '<S13>/Add14'
 
   px42LoopCtrQGC20220313_B.Product3_i = (px42LoopCtrQGC20220313_B.Product6_a -
     px42LoopCtrQGC20220313_B.Product5_l) * px42LoopCtrQGC20220313_P.Gain1_Gain_e;
 
-  // Fcn: '<S14>/Fcn6' incorporates:
-  //   Constant: '<S14>/Constant1'
+  // Fcn: '<S13>/Fcn6' incorporates:
+  //   Constant: '<S13>/Constant1'
 
   if (px42LoopCtrQGC20220313_P.Constant1_Value_ac < 0.0) {
     px42LoopCtrQGC20220313_B.fcn5 = -rt_powd_snf
@@ -1803,40 +1759,40 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
       (px42LoopCtrQGC20220313_P.Constant1_Value_ac, -0.9375);
   }
 
-  // End of Fcn: '<S14>/Fcn6'
+  // End of Fcn: '<S13>/Fcn6'
 
-  // Product: '<S14>/Product6'
+  // Product: '<S13>/Product6'
   px42LoopCtrQGC20220313_B.Product6_a = px42LoopCtrQGC20220313_B.fcn5 *
     px42LoopCtrQGC20220313_B.Product3_i * px42LoopCtrQGC20220313_B.Product1_p;
 
-  // Saturate: '<S14>/Saturation12'
+  // Saturate: '<S13>/Saturation12'
   if (px42LoopCtrQGC20220313_B.Product1_p >
       px42LoopCtrQGC20220313_P.Saturation12_UpperSat_d) {
-    px42LoopCtrQGC20220313_B.rtb_Product1_p_p =
+    px42LoopCtrQGC20220313_B.rtb_Product1_p_b =
       px42LoopCtrQGC20220313_P.Saturation12_UpperSat_d;
   } else if (px42LoopCtrQGC20220313_B.Product1_p <
              px42LoopCtrQGC20220313_P.Saturation12_LowerSat_j) {
-    px42LoopCtrQGC20220313_B.rtb_Product1_p_p =
+    px42LoopCtrQGC20220313_B.rtb_Product1_p_b =
       px42LoopCtrQGC20220313_P.Saturation12_LowerSat_j;
   } else {
-    px42LoopCtrQGC20220313_B.rtb_Product1_p_p =
+    px42LoopCtrQGC20220313_B.rtb_Product1_p_b =
       px42LoopCtrQGC20220313_B.Product1_p;
   }
 
-  // End of Saturate: '<S14>/Saturation12'
+  // End of Saturate: '<S13>/Saturation12'
 
-  // Product: '<S14>/Product5' incorporates:
-  //   Constant: '<S14>/Constant4'
-  //   Fcn: '<S14>/Fcn5'
-  //   Sum: '<S14>/Add11'
+  // Product: '<S13>/Product5' incorporates:
+  //   Constant: '<S13>/Constant4'
+  //   Fcn: '<S13>/Fcn5'
+  //   Sum: '<S13>/Add11'
 
   px42LoopCtrQGC20220313_B.Product5_l = rt_powd_snf
     (px42LoopCtrQGC20220313_B.Product2_d, 0.0625) *
-    px42LoopCtrQGC20220313_B.rtb_Product1_p_p *
+    px42LoopCtrQGC20220313_B.rtb_Product1_p_b *
     (px42LoopCtrQGC20220313_P.Constant4_Value_l -
      px42LoopCtrQGC20220313_B.Product3_i);
 
-  // Saturate: '<S14>/Saturation16'
+  // Saturate: '<S13>/Saturation16'
   if (px42LoopCtrQGC20220313_B.lambda4_h >
       px42LoopCtrQGC20220313_P.Saturation16_UpperSat_p) {
     px42LoopCtrQGC20220313_B.lambda4_h =
@@ -1847,41 +1803,41 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
       px42LoopCtrQGC20220313_P.Saturation16_LowerSat_i;
   }
 
-  // End of Saturate: '<S14>/Saturation16'
+  // End of Saturate: '<S13>/Saturation16'
 
-  // Saturate: '<S14>/Saturation14'
+  // Saturate: '<S13>/Saturation14'
   if (u0_tmp > px42LoopCtrQGC20220313_P.Saturation14_UpperSat_n) {
     u0_tmp = px42LoopCtrQGC20220313_P.Saturation14_UpperSat_n;
   } else if (u0_tmp < px42LoopCtrQGC20220313_P.Saturation14_LowerSat_a) {
     u0_tmp = px42LoopCtrQGC20220313_P.Saturation14_LowerSat_a;
   }
 
-  // End of Saturate: '<S14>/Saturation14'
+  // End of Saturate: '<S13>/Saturation14'
 
-  // Gain: '<S14>/Gain3' incorporates:
-  //   Sum: '<S14>/Add19'
+  // Gain: '<S13>/Gain3' incorporates:
+  //   Sum: '<S13>/Add19'
 
   px42LoopCtrQGC20220313_B.Product3_i = (px42LoopCtrQGC20220313_B.lambda4_h -
     u0_tmp) * px42LoopCtrQGC20220313_P.Gain3_Gain_p;
 
-  // Saturate: '<S14>/Saturation1'
+  // Saturate: '<S13>/Saturation1'
   if (px42LoopCtrQGC20220313_B.Product1_p >
       px42LoopCtrQGC20220313_P.Saturation1_UpperSat_d) {
-    px42LoopCtrQGC20220313_B.rtb_Product1_p_p =
+    px42LoopCtrQGC20220313_B.rtb_Product1_p_b =
       px42LoopCtrQGC20220313_P.Saturation1_UpperSat_d;
   } else if (px42LoopCtrQGC20220313_B.Product1_p <
              px42LoopCtrQGC20220313_P.Saturation1_LowerSat_g) {
-    px42LoopCtrQGC20220313_B.rtb_Product1_p_p =
+    px42LoopCtrQGC20220313_B.rtb_Product1_p_b =
       px42LoopCtrQGC20220313_P.Saturation1_LowerSat_g;
   } else {
-    px42LoopCtrQGC20220313_B.rtb_Product1_p_p =
+    px42LoopCtrQGC20220313_B.rtb_Product1_p_b =
       px42LoopCtrQGC20220313_B.Product1_p;
   }
 
-  // End of Saturate: '<S14>/Saturation1'
+  // End of Saturate: '<S13>/Saturation1'
 
-  // Fcn: '<S14>/Fcn7' incorporates:
-  //   Constant: '<S14>/Constant1'
+  // Fcn: '<S13>/Fcn7' incorporates:
+  //   Constant: '<S13>/Constant1'
 
   if (px42LoopCtrQGC20220313_P.Constant1_Value_ac < 0.0) {
     px42LoopCtrQGC20220313_B.fcn5 = -rt_powd_snf
@@ -1891,9 +1847,9 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
       (px42LoopCtrQGC20220313_P.Constant1_Value_ac, -0.75);
   }
 
-  // End of Fcn: '<S14>/Fcn7'
+  // End of Fcn: '<S13>/Fcn7'
 
-  // Saturate: '<S14>/Saturation15'
+  // Saturate: '<S13>/Saturation15'
   if (px42LoopCtrQGC20220313_B.Product1_p >
       px42LoopCtrQGC20220313_P.Saturation15_UpperSat_k) {
     px42LoopCtrQGC20220313_B.lambda4_h =
@@ -1906,25 +1862,25 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
     px42LoopCtrQGC20220313_B.lambda4_h = px42LoopCtrQGC20220313_B.Product1_p;
   }
 
-  // End of Saturate: '<S14>/Saturation15'
+  // End of Saturate: '<S13>/Saturation15'
 
-  // Sum: '<S14>/Add2' incorporates:
-  //   Constant: '<S14>/Constant6'
-  //   DiscreteIntegrator: '<S14>/Discrete-Time Integrator3'
-  //   Fcn: '<S14>/Fcn8'
-  //   Gain: '<S14>/Gain6'
-  //   Gain: '<S14>/l2'
-  //   Gain: '<S14>/lambda2'
-  //   Product: '<S14>/Product7'
-  //   Product: '<S14>/Product8'
-  //   Sum: '<S14>/Add16'
-  //   Sum: '<S14>/Add20'
-  //   Sum: '<S14>/Add3'
+  // Sum: '<S13>/Add2' incorporates:
+  //   Constant: '<S13>/Constant6'
+  //   DiscreteIntegrator: '<S13>/Discrete-Time Integrator3'
+  //   Fcn: '<S13>/Fcn8'
+  //   Gain: '<S13>/Gain6'
+  //   Gain: '<S13>/l2'
+  //   Gain: '<S13>/lambda2'
+  //   Product: '<S13>/Product7'
+  //   Product: '<S13>/Product8'
+  //   Sum: '<S13>/Add16'
+  //   Sum: '<S13>/Add20'
+  //   Sum: '<S13>/Add3'
 
   px42LoopCtrQGC20220313_B.rtb_DataTypeConversion3_idx_0 =
     (((px42LoopCtrQGC20220313_P.lambda2_Gain_d *
        px42LoopCtrQGC20220313_B.Product1_p + px42LoopCtrQGC20220313_P.l2_Gain_i *
-       px42LoopCtrQGC20220313_B.rtb_Product1_p_p) +
+       px42LoopCtrQGC20220313_B.rtb_Product1_p_b) +
       (px42LoopCtrQGC20220313_B.rtb_DataTypeConversion3_idx_0 -
        px42LoopCtrQGC20220313_B.rtb_DataTypeConversion3_idx_1)) +
      px42LoopCtrQGC20220313_DW.DiscreteTimeIntegrator3_DSTAT_m) +
@@ -1936,7 +1892,7 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
       px42LoopCtrQGC20220313_B.Product3_i)) *
     px42LoopCtrQGC20220313_P.Gain6_Gain_f;
 
-  // Saturate: '<S14>/Saturation3'
+  // Saturate: '<S13>/Saturation3'
   if (px42LoopCtrQGC20220313_B.Product1_p >
       px42LoopCtrQGC20220313_P.Saturation3_UpperSat_i) {
     px42LoopCtrQGC20220313_B.rtb_DataTypeConversion3_idx_1 =
@@ -1950,9 +1906,9 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
       px42LoopCtrQGC20220313_B.Product1_p;
   }
 
-  // End of Saturate: '<S14>/Saturation3'
+  // End of Saturate: '<S13>/Saturation3'
 
-  // Gain: '<S14>/lambda4'
+  // Gain: '<S13>/lambda4'
   px42LoopCtrQGC20220313_B.lambda4_h = px42LoopCtrQGC20220313_P.lambda4_Gain_b *
     px42LoopCtrQGC20220313_B.Product1_p;
 
@@ -1963,23 +1919,23 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
      &px42LoopCtrQGC20220313_B.b_varargout_2, false, 1.0);
 
   // Outputs for Enabled SubSystem: '<S3>/Enabled Subsystem' incorporates:
-  //   EnablePort: '<S44>/Enable'
+  //   EnablePort: '<S43>/Enable'
 
   if (rtb_LogicalOperator) {
-    // SignalConversion generated from: '<S44>/In1'
+    // SignalConversion generated from: '<S43>/In1'
     px42LoopCtrQGC20220313_B.In1 = px42LoopCtrQGC20220313_B.b_varargout_2;
-    srUpdateBC(px42LoopCtrQGC20220313_DW.EnabledSubsystem_SubsysRanBC_p);
+    srUpdateBC(px42LoopCtrQGC20220313_DW.EnabledSubsystem_SubsysRanBC);
   }
 
   // End of Outputs for SubSystem: '<S3>/Enabled Subsystem'
 
-  // Sqrt: '<S51>/sqrt' incorporates:
+  // Sqrt: '<S50>/sqrt' incorporates:
   //   DataTypeConversion: '<Root>/Data Type Conversion1'
-  //   Product: '<S52>/Product'
-  //   Product: '<S52>/Product1'
-  //   Product: '<S52>/Product2'
-  //   Product: '<S52>/Product3'
-  //   Sum: '<S52>/Sum'
+  //   Product: '<S51>/Product'
+  //   Product: '<S51>/Product1'
+  //   Product: '<S51>/Product2'
+  //   Product: '<S51>/Product3'
+  //   Sum: '<S51>/Sum'
 
   px42LoopCtrQGC20220313_B.Product3_i = sqrt(((static_cast<real_T>
     (px42LoopCtrQGC20220313_B.In1.q[0]) * px42LoopCtrQGC20220313_B.In1.q[0] +
@@ -1989,25 +1945,25 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
     static_cast<real_T>(px42LoopCtrQGC20220313_B.In1.q[3]) *
     px42LoopCtrQGC20220313_B.In1.q[3]);
 
-  // Product: '<S46>/Product' incorporates:
+  // Product: '<S45>/Product' incorporates:
   //   DataTypeConversion: '<Root>/Data Type Conversion1'
 
   px42LoopCtrQGC20220313_B.fcn5 = px42LoopCtrQGC20220313_B.In1.q[0] /
     px42LoopCtrQGC20220313_B.Product3_i;
 
-  // Product: '<S46>/Product1' incorporates:
+  // Product: '<S45>/Product1' incorporates:
   //   DataTypeConversion: '<Root>/Data Type Conversion1'
 
   px42LoopCtrQGC20220313_B.Product1_p = px42LoopCtrQGC20220313_B.In1.q[1] /
     px42LoopCtrQGC20220313_B.Product3_i;
 
-  // Product: '<S46>/Product2' incorporates:
+  // Product: '<S45>/Product2' incorporates:
   //   DataTypeConversion: '<Root>/Data Type Conversion1'
 
   px42LoopCtrQGC20220313_B.Product2_d = px42LoopCtrQGC20220313_B.In1.q[2] /
     px42LoopCtrQGC20220313_B.Product3_i;
 
-  // Product: '<S46>/Product3' incorporates:
+  // Product: '<S45>/Product3' incorporates:
   //   DataTypeConversion: '<Root>/Data Type Conversion1'
 
   px42LoopCtrQGC20220313_B.Product3_i = px42LoopCtrQGC20220313_B.In1.q[3] /
@@ -2018,61 +1974,61 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
     px42LoopCtrQGC20220313_B.Product3_i - px42LoopCtrQGC20220313_B.fcn5 *
     px42LoopCtrQGC20220313_B.Product2_d) * -2.0;
 
-  // If: '<S47>/If' incorporates:
+  // If: '<S46>/If' incorporates:
+  //   Constant: '<S47>/Constant'
   //   Constant: '<S48>/Constant'
-  //   Constant: '<S49>/Constant'
 
   if (px42LoopCtrQGC20220313_B.fcn3 > 1.0) {
-    // Outputs for IfAction SubSystem: '<S47>/If Action Subsystem' incorporates:
-    //   ActionPort: '<S48>/Action Port'
+    // Outputs for IfAction SubSystem: '<S46>/If Action Subsystem' incorporates:
+    //   ActionPort: '<S47>/Action Port'
 
     px42LoopCtrQGC20220313_B.fcn3 = px42LoopCtrQGC20220313_P.Constant_Value_e;
 
-    // End of Outputs for SubSystem: '<S47>/If Action Subsystem'
+    // End of Outputs for SubSystem: '<S46>/If Action Subsystem'
 
-    // Update for IfAction SubSystem: '<S47>/If Action Subsystem' incorporates:
-    //   ActionPort: '<S48>/Action Port'
+    // Update for IfAction SubSystem: '<S46>/If Action Subsystem' incorporates:
+    //   ActionPort: '<S47>/Action Port'
 
-    // Update for If: '<S47>/If' incorporates:
-    //   Constant: '<S48>/Constant'
+    // Update for If: '<S46>/If' incorporates:
+    //   Constant: '<S47>/Constant'
 
     srUpdateBC(px42LoopCtrQGC20220313_DW.IfActionSubsystem_SubsysRanBC);
 
-    // End of Update for SubSystem: '<S47>/If Action Subsystem'
+    // End of Update for SubSystem: '<S46>/If Action Subsystem'
   } else if (px42LoopCtrQGC20220313_B.fcn3 < -1.0) {
-    // Outputs for IfAction SubSystem: '<S47>/If Action Subsystem1' incorporates:
-    //   ActionPort: '<S49>/Action Port'
+    // Outputs for IfAction SubSystem: '<S46>/If Action Subsystem1' incorporates:
+    //   ActionPort: '<S48>/Action Port'
 
     px42LoopCtrQGC20220313_B.fcn3 = px42LoopCtrQGC20220313_P.Constant_Value_b1;
 
-    // End of Outputs for SubSystem: '<S47>/If Action Subsystem1'
+    // End of Outputs for SubSystem: '<S46>/If Action Subsystem1'
 
-    // Update for IfAction SubSystem: '<S47>/If Action Subsystem1' incorporates:
-    //   ActionPort: '<S49>/Action Port'
+    // Update for IfAction SubSystem: '<S46>/If Action Subsystem1' incorporates:
+    //   ActionPort: '<S48>/Action Port'
 
-    // Update for If: '<S47>/If' incorporates:
-    //   Constant: '<S49>/Constant'
+    // Update for If: '<S46>/If' incorporates:
+    //   Constant: '<S48>/Constant'
 
     srUpdateBC(px42LoopCtrQGC20220313_DW.IfActionSubsystem1_SubsysRanBC);
 
-    // End of Update for SubSystem: '<S47>/If Action Subsystem1'
+    // End of Update for SubSystem: '<S46>/If Action Subsystem1'
   } else {
-    // Update for IfAction SubSystem: '<S47>/If Action Subsystem2' incorporates:
-    //   ActionPort: '<S50>/Action Port'
+    // Update for IfAction SubSystem: '<S46>/If Action Subsystem2' incorporates:
+    //   ActionPort: '<S49>/Action Port'
 
-    // Update for If: '<S47>/If'
+    // Update for If: '<S46>/If'
     srUpdateBC(px42LoopCtrQGC20220313_DW.IfActionSubsystem2_SubsysRanBC);
 
-    // End of Update for SubSystem: '<S47>/If Action Subsystem2'
+    // End of Update for SubSystem: '<S46>/If Action Subsystem2'
   }
 
-  // End of If: '<S47>/If'
+  // End of If: '<S46>/If'
 
   // Fcn: '<S4>/fcn5' incorporates:
   //   Fcn: '<S4>/fcn2'
 
   u0_tmp = px42LoopCtrQGC20220313_B.fcn5 * px42LoopCtrQGC20220313_B.fcn5;
-  px42LoopCtrQGC20220313_B.rtb_Product1_p_p =
+  px42LoopCtrQGC20220313_B.rtb_Product1_p_b =
     px42LoopCtrQGC20220313_B.Product1_p * px42LoopCtrQGC20220313_B.Product1_p;
   roll_tmp = px42LoopCtrQGC20220313_B.Product2_d *
     px42LoopCtrQGC20220313_B.Product2_d;
@@ -2082,15 +2038,15 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
   // DataStoreWrite: '<Root>/Data Store Write' incorporates:
   //   Fcn: '<S4>/fcn4'
   //   Fcn: '<S4>/fcn5'
-  //   Trigonometry: '<S45>/Trigonometric Function3'
+  //   Trigonometry: '<S44>/Trigonometric Function3'
 
   px42LoopCtrQGC20220313_DW.roll = rt_atan2d_snf
     ((px42LoopCtrQGC20220313_B.Product2_d * px42LoopCtrQGC20220313_B.Product3_i
       + px42LoopCtrQGC20220313_B.fcn5 * px42LoopCtrQGC20220313_B.Product1_p) *
-     2.0, ((u0_tmp - px42LoopCtrQGC20220313_B.rtb_Product1_p_p) - roll_tmp) +
+     2.0, ((u0_tmp - px42LoopCtrQGC20220313_B.rtb_Product1_p_b) - roll_tmp) +
      roll_tmp_0);
 
-  // Trigonometry: '<S45>/trigFcn'
+  // Trigonometry: '<S44>/trigFcn'
   if (px42LoopCtrQGC20220313_B.fcn3 > 1.0) {
     px42LoopCtrQGC20220313_B.fcn3 = 1.0;
   } else if (px42LoopCtrQGC20220313_B.fcn3 < -1.0) {
@@ -2098,19 +2054,19 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
   }
 
   // DataStoreWrite: '<Root>/Data Store Write1' incorporates:
-  //   Trigonometry: '<S45>/trigFcn'
+  //   Trigonometry: '<S44>/trigFcn'
 
   px42LoopCtrQGC20220313_DW.pitch = asin(px42LoopCtrQGC20220313_B.fcn3);
 
   // DataStoreWrite: '<Root>/Data Store Write10' incorporates:
   //   Fcn: '<S4>/fcn1'
   //   Fcn: '<S4>/fcn2'
-  //   Trigonometry: '<S45>/Trigonometric Function1'
+  //   Trigonometry: '<S44>/Trigonometric Function1'
 
   px42LoopCtrQGC20220313_DW.yaw = rt_atan2d_snf
     ((px42LoopCtrQGC20220313_B.Product1_p * px42LoopCtrQGC20220313_B.Product2_d
       + px42LoopCtrQGC20220313_B.fcn5 * px42LoopCtrQGC20220313_B.Product3_i) *
-     2.0, ((u0_tmp + px42LoopCtrQGC20220313_B.rtb_Product1_p_p) - roll_tmp) -
+     2.0, ((u0_tmp + px42LoopCtrQGC20220313_B.rtb_Product1_p_b) - roll_tmp) -
      roll_tmp_0);
 
   // DataStoreWrite: '<Root>/Data Store Write20' incorporates:
@@ -2129,51 +2085,14 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
 
   px42LoopCtrQGC20220313_DW.roll_speed = px42LoopCtrQGC20220313_B.In1.rollspeed;
 
-  // MATLABSystem: '<S53>/SourceBlock'
-  b_varargout_1 = uORB_read_step(px42LoopCtrQGC20220313_DW.obj_a.orbMetadataObj,
-    &px42LoopCtrQGC20220313_DW.obj_a.eventStructObj,
-    &px42LoopCtrQGC20220313_B.b_varargout_2_c, false, 5000.0);
-
-  // Outputs for Enabled SubSystem: '<S53>/Enabled Subsystem' incorporates:
-  //   EnablePort: '<S54>/Enable'
-
-  if (b_varargout_1) {
-    // SignalConversion generated from: '<S54>/In1'
-    px42LoopCtrQGC20220313_B.In1_k = px42LoopCtrQGC20220313_B.b_varargout_2_c;
-    srUpdateBC(px42LoopCtrQGC20220313_DW.EnabledSubsystem_SubsysRanBC);
-  }
-
-  // End of MATLABSystem: '<S53>/SourceBlock'
-  // End of Outputs for SubSystem: '<S53>/Enabled Subsystem'
-  for (int32_T i = 0; i < 18; i++) {
-    // SignalConversion generated from: '<S5>/Bus Selector'
-    px42LoopCtrQGC20220313_B.values[i] = px42LoopCtrQGC20220313_B.In1_k.values[i];
-  }
-
-  // Switch: '<Root>/Switch3'
-  if (px42LoopCtrQGC20220313_B.values[7] >
-      px42LoopCtrQGC20220313_P.Switch3_Threshold) {
-    // Switch: '<Root>/Switch3' incorporates:
-    //   Constant: '<Root>/Constant10'
-
-    px42LoopCtrQGC20220313_B.Switch3 = px42LoopCtrQGC20220313_P.Constant10_Value;
-  } else {
-    // Switch: '<Root>/Switch3' incorporates:
-    //   Constant: '<Root>/Constant11'
-
-    px42LoopCtrQGC20220313_B.Switch3 = px42LoopCtrQGC20220313_P.Constant11_Value;
-  }
-
-  // End of Switch: '<Root>/Switch3'
-
-  // DataStoreWrite: '<S7>/Data Store Write28' incorporates:
-  //   Constant: '<S7>/attitude_flag'
+  // DataStoreWrite: '<S6>/Data Store Write28' incorporates:
+  //   Constant: '<S6>/attitude_flag'
 
   px42LoopCtrQGC20220313_DW.attitude_flag =
     px42LoopCtrQGC20220313_P.attitude_flag_Value;
 
-  // DataStoreWrite: '<S8>/Data Store Write28' incorporates:
-  //   Constant: '<S8>/observer_flag'
+  // DataStoreWrite: '<S7>/Data Store Write28' incorporates:
+  //   Constant: '<S7>/observer_flag'
 
   px42LoopCtrQGC20220313_DW.observer_flag =
     px42LoopCtrQGC20220313_P.observer_flag_Value;
@@ -2296,7 +2215,7 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
 
   // MATLABSystem: '<Root>/PX4 PWM Output1' incorporates:
   //   Constant: '<Root>/Constant2'
-  //   DataStoreWrite: '<Root>/Data Store Write16'
+  //   Constant: '<Root>/Reset'
   //   Sum: '<Root>/Add3'
 
   px42LoopCtrQGC20220313_B.pwmValue[3] = static_cast<uint16_T>
@@ -2304,7 +2223,7 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
      (static_cast<uint16_T>(-static_cast<int16_T>(static_cast<uint16_T>
         (-px42LoopCtrQGC20220313_B.fcn5)))) : static_cast<int32_T>
      (static_cast<uint16_T>(px42LoopCtrQGC20220313_B.fcn5)));
-  if (px42LoopCtrQGC20220313_B.Switch3) {
+  if (px42LoopCtrQGC20220313_P.Reset_Value) {
     if (!px42LoopCtrQGC20220313_DW.obj.isArmed) {
       px42LoopCtrQGC20220313_DW.obj.isArmed = true;
       status = pwm_arm(&px42LoopCtrQGC20220313_DW.obj.pwmDevHandler,
@@ -2374,28 +2293,6 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
 
   px42LoopCtrQGC20220313_B.NOT = !rtb_LogicalOperator;
 
-  // SignalConversion generated from: '<Root>/Serial Transmit1' incorporates:
-  //   Constant: '<Root>/Constant6'
-  //   DataStoreRead: '<Root>/Data Store Read56'
-  //   DataStoreRead: '<Root>/Data Store Read57'
-  //   DataStoreRead: '<Root>/Data Store Read58'
-
-  px42LoopCtrQGC20220313_B.TmpSignalConversionAtProduc[0] =
-    px42LoopCtrQGC20220313_P.Constant6_Value_m;
-  px42LoopCtrQGC20220313_B.TmpSignalConversionAtProduc[1] =
-    px42LoopCtrQGC20220313_DW.pitch;
-  px42LoopCtrQGC20220313_B.TmpSignalConversionAtProduc[2] =
-    px42LoopCtrQGC20220313_DW.roll;
-  px42LoopCtrQGC20220313_B.TmpSignalConversionAtProduc[3] =
-    px42LoopCtrQGC20220313_DW.yaw;
-
-  // MATLABSystem: '<Root>/Serial Transmit1'
-  memcpy((void *)&px42LoopCtrQGC20220313_B.TxDataLocChar[0], (void *)
-         &px42LoopCtrQGC20220313_B.TmpSignalConversionAtProduc[0], (uint32_T)
-         ((size_t)32 * sizeof(uint8_T)));
-  MW_SCI_Transmit(px42LoopCtrQGC20220313_DW.obj_e.SCIDriverObj.MW_SCIHANDLE,
-                  &px42LoopCtrQGC20220313_B.TxDataLocChar[0], 32U);
-
   // Gain: '<Root>/Gain5' incorporates:
   //   DataStoreRead: '<Root>/Data Store Read10'
 
@@ -2409,9 +2306,10 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
     px42LoopCtrQGC20220313_DW.roll;
 
   // DataStoreRead: '<Root>/Data Store Read12' incorporates:
-  //   DataStoreWrite: '<Root>/Data Store Write16'
+  //   Constant: '<Root>/Reset'
 
-  px42LoopCtrQGC20220313_B.DataStoreRead12 = px42LoopCtrQGC20220313_B.Switch3;
+  px42LoopCtrQGC20220313_B.DataStoreRead12 =
+    px42LoopCtrQGC20220313_P.Reset_Value;
 
   // DataStoreRead: '<Root>/Data Store Read13' incorporates:
   //   Constant: '<Root>/Constant1'
@@ -2478,18 +2376,18 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
   px42LoopCtrQGC20220313_B.DataStoreRead49 = px42LoopCtrQGC20220313_DW.pos_y;
 
   // Outputs for Enabled SubSystem: '<Root>/Subsystem1' incorporates:
-  //   EnablePort: '<S6>/Enable'
+  //   EnablePort: '<S5>/Enable'
 
   // DataStoreRead: '<Root>/Data Store Read54'
   if (px42LoopCtrQGC20220313_DW.attitude_flag) {
-    // DiscreteIntegrator: '<S6>/Discrete-Time Integrator' incorporates:
-    //   DataStoreWrite: '<S6>/Data Store Write27'
+    // DiscreteIntegrator: '<S5>/Discrete-Time Integrator' incorporates:
+    //   DataStoreWrite: '<S5>/Data Store Write27'
 
     px42LoopCtrQGC20220313_DW.t =
       px42LoopCtrQGC20220313_DW.DiscreteTimeIntegrator_DSTAT_fj;
 
-    // Update for DiscreteIntegrator: '<S6>/Discrete-Time Integrator' incorporates:
-    //   Constant: '<S6>/Constant9'
+    // Update for DiscreteIntegrator: '<S5>/Discrete-Time Integrator' incorporates:
+    //   Constant: '<S5>/Constant9'
 
     px42LoopCtrQGC20220313_DW.DiscreteTimeIntegrator_DSTAT_fj +=
       px42LoopCtrQGC20220313_P.DiscreteTimeIntegrator_gainval *
@@ -2509,15 +2407,15 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
   // DataStoreRead: '<Root>/Data Store Read9'
   px42LoopCtrQGC20220313_B.DataStoreRead9 = px42LoopCtrQGC20220313_DW.accY;
 
-  // Update for UnitDelay: '<S34>/UD'
+  // Update for UnitDelay: '<S33>/UD'
   //
-  //  Block description for '<S34>/UD':
+  //  Block description for '<S33>/UD':
   //
   //   Store in Global RAM
 
   px42LoopCtrQGC20220313_DW.UD_DSTATE = px42LoopCtrQGC20220313_B.TSamp;
 
-  // Saturate: '<S15>/Saturation3'
+  // Saturate: '<S14>/Saturation3'
   if (px42LoopCtrQGC20220313_B.Abs6 >
       px42LoopCtrQGC20220313_P.Saturation3_UpperSat) {
     px42LoopCtrQGC20220313_B.Product2_d =
@@ -2530,14 +2428,14 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
     px42LoopCtrQGC20220313_B.Product2_d = px42LoopCtrQGC20220313_B.Abs6;
   }
 
-  // End of Saturate: '<S15>/Saturation3'
+  // End of Saturate: '<S14>/Saturation3'
 
-  // Update for DiscreteIntegrator: '<S15>/Discrete-Time Integrator3' incorporates:
-  //   Gain: '<S15>/Gain7'
-  //   Gain: '<S15>/l4'
-  //   Gain: '<S15>/lambda4'
-  //   Sum: '<S15>/Add15'
-  //   Sum: '<S15>/Add5'
+  // Update for DiscreteIntegrator: '<S14>/Discrete-Time Integrator3' incorporates:
+  //   Gain: '<S14>/Gain7'
+  //   Gain: '<S14>/l4'
+  //   Gain: '<S14>/lambda4'
+  //   Sum: '<S14>/Add15'
+  //   Sum: '<S14>/Add5'
 
   px42LoopCtrQGC20220313_DW.DiscreteTimeIntegrator3_DSTATE +=
     ((px42LoopCtrQGC20220313_P.l4_Gain * px42LoopCtrQGC20220313_B.Product2_d +
@@ -2555,19 +2453,19 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
     px42LoopCtrQGC20220313_P.SineWave_HCos - px42LoopCtrQGC20220313_B.TSamp *
     px42LoopCtrQGC20220313_P.SineWave_Hsin;
 
-  // Update for UnitDelay: '<S16>/UD'
+  // Update for UnitDelay: '<S15>/UD'
   //
-  //  Block description for '<S16>/UD':
+  //  Block description for '<S15>/UD':
   //
   //   Store in Global RAM
 
   px42LoopCtrQGC20220313_DW.UD_DSTATE_b = px42LoopCtrQGC20220313_B.z2;
 
-  // Update for DiscreteIntegrator: '<S13>/Discrete-Time Integrator3' incorporates:
-  //   Gain: '<S13>/Gain7'
-  //   Gain: '<S13>/l4'
-  //   Sum: '<S13>/Add15'
-  //   Sum: '<S13>/Add5'
+  // Update for DiscreteIntegrator: '<S12>/Discrete-Time Integrator3' incorporates:
+  //   Gain: '<S12>/Gain7'
+  //   Gain: '<S12>/l4'
+  //   Sum: '<S12>/Add15'
+  //   Sum: '<S12>/Add5'
 
   px42LoopCtrQGC20220313_DW.DiscreteTimeIntegrator3_DSTAT_a +=
     ((px42LoopCtrQGC20220313_P.l4_Gain_p * px42LoopCtrQGC20220313_B.roll_hat_k +
@@ -2576,19 +2474,19 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
      px42LoopCtrQGC20220313_P.Gain7_Gain_d) *
     px42LoopCtrQGC20220313_P.DiscreteTimeIntegrator3_gainv_m;
 
-  // Update for UnitDelay: '<S25>/UD'
+  // Update for UnitDelay: '<S24>/UD'
   //
-  //  Block description for '<S25>/UD':
+  //  Block description for '<S24>/UD':
   //
   //   Store in Global RAM
 
   px42LoopCtrQGC20220313_DW.UD_DSTATE_n = px42LoopCtrQGC20220313_B.z2_e;
 
-  // Update for DiscreteIntegrator: '<S14>/Discrete-Time Integrator3' incorporates:
-  //   Gain: '<S14>/Gain7'
-  //   Gain: '<S14>/l4'
-  //   Sum: '<S14>/Add15'
-  //   Sum: '<S14>/Add5'
+  // Update for DiscreteIntegrator: '<S13>/Discrete-Time Integrator3' incorporates:
+  //   Gain: '<S13>/Gain7'
+  //   Gain: '<S13>/l4'
+  //   Sum: '<S13>/Add15'
+  //   Sum: '<S13>/Add5'
 
   px42LoopCtrQGC20220313_DW.DiscreteTimeIntegrator3_DSTAT_m +=
     ((px42LoopCtrQGC20220313_P.l4_Gain_o *
@@ -2598,7 +2496,7 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
      px42LoopCtrQGC20220313_P.Gain7_Gain_l) *
     px42LoopCtrQGC20220313_P.DiscreteTimeIntegrator3_gainv_e;
 
-  // Saturate: '<S15>/Saturation'
+  // Saturate: '<S14>/Saturation'
   if (px42LoopCtrQGC20220313_B.Abs6 >
       px42LoopCtrQGC20220313_P.Saturation_UpperSat_b) {
     px42LoopCtrQGC20220313_B.Product2_d =
@@ -2611,15 +2509,15 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
     px42LoopCtrQGC20220313_B.Product2_d = px42LoopCtrQGC20220313_B.Abs6;
   }
 
-  // End of Saturate: '<S15>/Saturation'
+  // End of Saturate: '<S14>/Saturation'
 
-  // Update for DiscreteIntegrator: '<S15>/Discrete-Time Integrator' incorporates:
-  //   DiscreteIntegrator: '<S15>/Discrete-Time Integrator1'
-  //   Gain: '<S15>/Gain5'
-  //   Gain: '<S15>/l1'
-  //   Gain: '<S15>/lambda1'
-  //   Sum: '<S15>/Add'
-  //   Sum: '<S15>/Add9'
+  // Update for DiscreteIntegrator: '<S14>/Discrete-Time Integrator' incorporates:
+  //   DiscreteIntegrator: '<S14>/Discrete-Time Integrator1'
+  //   Gain: '<S14>/Gain5'
+  //   Gain: '<S14>/l1'
+  //   Gain: '<S14>/lambda1'
+  //   Sum: '<S14>/Add'
+  //   Sum: '<S14>/Add9'
 
   px42LoopCtrQGC20220313_DW.DiscreteTimeIntegrator_DSTATE +=
     (((px42LoopCtrQGC20220313_P.l1_Gain * px42LoopCtrQGC20220313_B.Product2_d +
@@ -2629,17 +2527,17 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
      px42LoopCtrQGC20220313_P.Gain5_Gain) *
     px42LoopCtrQGC20220313_P.DiscreteTimeIntegrator_gainva_n;
 
-  // Update for DiscreteIntegrator: '<S15>/Discrete-Time Integrator1'
+  // Update for DiscreteIntegrator: '<S14>/Discrete-Time Integrator1'
   px42LoopCtrQGC20220313_DW.DiscreteTimeIntegrator1_DSTATE +=
     px42LoopCtrQGC20220313_P.DiscreteTimeIntegrator1_gainval *
     px42LoopCtrQGC20220313_B.z2_l;
 
-  // Update for DiscreteIntegrator: '<S13>/Discrete-Time Integrator' incorporates:
-  //   DiscreteIntegrator: '<S13>/Discrete-Time Integrator1'
-  //   Gain: '<S13>/Gain5'
-  //   Gain: '<S13>/l1'
-  //   Sum: '<S13>/Add'
-  //   Sum: '<S13>/Add9'
+  // Update for DiscreteIntegrator: '<S12>/Discrete-Time Integrator' incorporates:
+  //   DiscreteIntegrator: '<S12>/Discrete-Time Integrator1'
+  //   Gain: '<S12>/Gain5'
+  //   Gain: '<S12>/l1'
+  //   Sum: '<S12>/Add'
+  //   Sum: '<S12>/Add9'
 
   px42LoopCtrQGC20220313_DW.DiscreteTimeIntegrator_DSTATE_p +=
     (((px42LoopCtrQGC20220313_P.l1_Gain_p * px42LoopCtrQGC20220313_B.roll_hat_e
@@ -2649,17 +2547,17 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
      * px42LoopCtrQGC20220313_P.Gain5_Gain_o) *
     px42LoopCtrQGC20220313_P.DiscreteTimeIntegrator_gainva_e;
 
-  // Update for DiscreteIntegrator: '<S13>/Discrete-Time Integrator1'
+  // Update for DiscreteIntegrator: '<S12>/Discrete-Time Integrator1'
   px42LoopCtrQGC20220313_DW.DiscreteTimeIntegrator1_DSTAT_i +=
     px42LoopCtrQGC20220313_P.DiscreteTimeIntegrator1_gainv_n *
     px42LoopCtrQGC20220313_B.Add2_o;
 
-  // Update for DiscreteIntegrator: '<S14>/Discrete-Time Integrator' incorporates:
-  //   DiscreteIntegrator: '<S14>/Discrete-Time Integrator1'
-  //   Gain: '<S14>/Gain5'
-  //   Gain: '<S14>/l1'
-  //   Sum: '<S14>/Add'
-  //   Sum: '<S14>/Add9'
+  // Update for DiscreteIntegrator: '<S13>/Discrete-Time Integrator' incorporates:
+  //   DiscreteIntegrator: '<S13>/Discrete-Time Integrator1'
+  //   Gain: '<S13>/Gain5'
+  //   Gain: '<S13>/l1'
+  //   Sum: '<S13>/Add'
+  //   Sum: '<S13>/Add9'
 
   px42LoopCtrQGC20220313_DW.DiscreteTimeIntegrator_DSTATE_f +=
     (((px42LoopCtrQGC20220313_P.l1_Gain_d *
@@ -2670,7 +2568,7 @@ void px42LoopCtrQGC20220313_step0(void) // Sample time: [0.005s, 0.0s]
      * px42LoopCtrQGC20220313_P.Gain5_Gain_l) *
     px42LoopCtrQGC20220313_P.DiscreteTimeIntegrator_gainv_nv;
 
-  // Update for DiscreteIntegrator: '<S14>/Discrete-Time Integrator1'
+  // Update for DiscreteIntegrator: '<S13>/Discrete-Time Integrator1'
   px42LoopCtrQGC20220313_DW.DiscreteTimeIntegrator1_DSTAT_g +=
     px42LoopCtrQGC20220313_P.DiscreteTimeIntegrator1_gainv_g *
     px42LoopCtrQGC20220313_B.rtb_DataTypeConversion3_idx_0;
@@ -2722,10 +2620,10 @@ void px42LoopCtrQGC20220313_step1(void) // Sample time: [0.01s, 0.0s]
     &px42LoopCtrQGC20220313_B.b_varargout_2_m, false, 1.0);
 
   // Outputs for Enabled SubSystem: '<S2>/Enabled Subsystem' incorporates:
-  //   EnablePort: '<S43>/Enable'
+  //   EnablePort: '<S42>/Enable'
 
   if (b_varargout_1) {
-    // SignalConversion generated from: '<S43>/In1'
+    // SignalConversion generated from: '<S42>/In1'
     px42LoopCtrQGC20220313_B.In1_a = px42LoopCtrQGC20220313_B.b_varargout_2_m;
     srUpdateBC(px42LoopCtrQGC20220313_DW.EnabledSubsystem_SubsysRanBC_b);
   }
@@ -2793,15 +2691,15 @@ void px42LoopCtrQGC20220313_initialize(void)
   px42LoopCtrQGC20220313_M->Timing.stepSize0 = 0.005;
 
   // External mode info
-  px42LoopCtrQGC20220313_M->Sizes.checksums[0] = (2381993283U);
-  px42LoopCtrQGC20220313_M->Sizes.checksums[1] = (3627714463U);
-  px42LoopCtrQGC20220313_M->Sizes.checksums[2] = (1324412784U);
-  px42LoopCtrQGC20220313_M->Sizes.checksums[3] = (3501579728U);
+  px42LoopCtrQGC20220313_M->Sizes.checksums[0] = (2862294771U);
+  px42LoopCtrQGC20220313_M->Sizes.checksums[1] = (871401741U);
+  px42LoopCtrQGC20220313_M->Sizes.checksums[2] = (998257096U);
+  px42LoopCtrQGC20220313_M->Sizes.checksums[3] = (569271191U);
 
   {
     static const sysRanDType rtAlwaysEnabled = SUBSYS_RAN_BC_ENABLE;
     static RTWExtModeInfo rt_ExtModeInfo;
-    static const sysRanDType *systemRan[32];
+    static const sysRanDType *systemRan[27];
     px42LoopCtrQGC20220313_M->extModeInfo = (&rt_ExtModeInfo);
     rteiSetSubSystemActiveVectorAddresses(&rt_ExtModeInfo, systemRan);
     systemRan[0] = &rtAlwaysEnabled;
@@ -2830,7 +2728,7 @@ void px42LoopCtrQGC20220313_initialize(void)
       &px42LoopCtrQGC20220313_DW.EnabledSubsystem_SubsysRanBC_b;
     systemRan[20] = &rtAlwaysEnabled;
     systemRan[21] = (sysRanDType *)
-      &px42LoopCtrQGC20220313_DW.EnabledSubsystem_SubsysRanBC_p;
+      &px42LoopCtrQGC20220313_DW.EnabledSubsystem_SubsysRanBC;
     systemRan[22] = &rtAlwaysEnabled;
     systemRan[23] = (sysRanDType *)
       &px42LoopCtrQGC20220313_DW.IfActionSubsystem_SubsysRanBC;
@@ -2839,13 +2737,7 @@ void px42LoopCtrQGC20220313_initialize(void)
     systemRan[25] = (sysRanDType *)
       &px42LoopCtrQGC20220313_DW.IfActionSubsystem2_SubsysRanBC;
     systemRan[26] = (sysRanDType *)
-      &px42LoopCtrQGC20220313_DW.EnabledSubsystem_SubsysRanBC;
-    systemRan[27] = &rtAlwaysEnabled;
-    systemRan[28] = &rtAlwaysEnabled;
-    systemRan[29] = (sysRanDType *)
       &px42LoopCtrQGC20220313_DW.Subsystem1_SubsysRanBC;
-    systemRan[30] = &rtAlwaysEnabled;
-    systemRan[31] = &rtAlwaysEnabled;
     rteiSetModelMappingInfoPtr(px42LoopCtrQGC20220313_M->extModeInfo,
       &px42LoopCtrQGC20220313_M->SpecialInfo.mappingInfo);
     rteiSetChecksumsPtr(px42LoopCtrQGC20220313_M->extModeInfo,
@@ -2869,7 +2761,7 @@ void px42LoopCtrQGC20220313_initialize(void)
   {
     static DataTypeTransInfo dtInfo;
     px42LoopCtrQGC20220313_M->SpecialInfo.mappingInfo = (&dtInfo);
-    dtInfo.numDataTypes = 30;
+    dtInfo.numDataTypes = 26;
     dtInfo.dataTypeSizes = &rtDataTypeSizes[0];
     dtInfo.dataTypeNames = &rtDataTypeNames[0];
 
@@ -2883,31 +2775,31 @@ void px42LoopCtrQGC20220313_initialize(void)
   {
     boolean_T rtb_DataStoreRead6;
 
-    // Start for DataStoreMemory: '<S36>/Data Store Memory'
+    // Start for DataStoreMemory: '<S35>/Data Store Memory'
     px42LoopCtrQGC20220313_DW.start_time_yaw =
       px42LoopCtrQGC20220313_P.DataStoreMemory_InitialValue;
 
-    // Start for DataStoreMemory: '<S18>/Data Store Memory'
+    // Start for DataStoreMemory: '<S17>/Data Store Memory'
     px42LoopCtrQGC20220313_DW.start_time =
       px42LoopCtrQGC20220313_P.DataStoreMemory_InitialValue_l;
 
-    // Start for DataStoreMemory: '<S27>/Data Store Memory'
+    // Start for DataStoreMemory: '<S26>/Data Store Memory'
     px42LoopCtrQGC20220313_DW.start_time_roll =
       px42LoopCtrQGC20220313_P.DataStoreMemory_InitialValue_b;
 
-    // Start for Sum: '<S17>/Add' incorporates:
+    // Start for Sum: '<S16>/Add' incorporates:
     //   DataStoreMemory: '<S1>/e_pitch'
 
     px42LoopCtrQGC20220313_DW.e_pitch =
       px42LoopCtrQGC20220313_P.e_pitch_InitialValue;
 
-    // Start for Sum: '<S26>/Add' incorporates:
+    // Start for Sum: '<S25>/Add' incorporates:
     //   DataStoreMemory: '<S1>/e_pitch1'
 
     px42LoopCtrQGC20220313_DW.e_pitch_roll =
       px42LoopCtrQGC20220313_P.e_pitch1_InitialValue;
 
-    // Start for Sum: '<S35>/Add' incorporates:
+    // Start for Sum: '<S34>/Add' incorporates:
     //   DataStoreMemory: '<S1>/e_pitch2'
 
     px42LoopCtrQGC20220313_DW.e_pitch_yaw =
@@ -2992,95 +2884,87 @@ void px42LoopCtrQGC20220313_initialize(void)
     px42LoopCtrQGC20220313_PrevZCX.Subsystem_Trig_ZCE_j = POS_ZCSIG;
     px42LoopCtrQGC20220313_PrevZCX.Subsystem_Trig_ZCE = POS_ZCSIG;
 
-    // InitializeConditions for UnitDelay: '<S34>/UD'
+    // InitializeConditions for UnitDelay: '<S33>/UD'
     //
-    //  Block description for '<S34>/UD':
+    //  Block description for '<S33>/UD':
     //
     //   Store in Global RAM
 
     px42LoopCtrQGC20220313_DW.UD_DSTATE =
       px42LoopCtrQGC20220313_P.DiscreteDerivative1_ICPrevScale;
 
-    // InitializeConditions for DiscreteIntegrator: '<S15>/Discrete-Time Integrator3' 
+    // InitializeConditions for DiscreteIntegrator: '<S14>/Discrete-Time Integrator3' 
     px42LoopCtrQGC20220313_DW.DiscreteTimeIntegrator3_DSTATE =
       px42LoopCtrQGC20220313_P.DiscreteTimeIntegrator3_IC;
 
-    // InitializeConditions for UnitDelay: '<S16>/UD'
+    // InitializeConditions for UnitDelay: '<S15>/UD'
     //
-    //  Block description for '<S16>/UD':
+    //  Block description for '<S15>/UD':
     //
     //   Store in Global RAM
 
     px42LoopCtrQGC20220313_DW.UD_DSTATE_b =
       px42LoopCtrQGC20220313_P.DiscreteDerivative1_ICPrevSca_o;
 
-    // InitializeConditions for DiscreteIntegrator: '<S13>/Discrete-Time Integrator3' 
+    // InitializeConditions for DiscreteIntegrator: '<S12>/Discrete-Time Integrator3' 
     px42LoopCtrQGC20220313_DW.DiscreteTimeIntegrator3_DSTAT_a =
       px42LoopCtrQGC20220313_P.DiscreteTimeIntegrator3_IC_k;
 
-    // InitializeConditions for UnitDelay: '<S25>/UD'
+    // InitializeConditions for UnitDelay: '<S24>/UD'
     //
-    //  Block description for '<S25>/UD':
+    //  Block description for '<S24>/UD':
     //
     //   Store in Global RAM
 
     px42LoopCtrQGC20220313_DW.UD_DSTATE_n =
       px42LoopCtrQGC20220313_P.DiscreteDerivative1_ICPrevSca_d;
 
-    // InitializeConditions for DiscreteIntegrator: '<S14>/Discrete-Time Integrator3' 
+    // InitializeConditions for DiscreteIntegrator: '<S13>/Discrete-Time Integrator3' 
     px42LoopCtrQGC20220313_DW.DiscreteTimeIntegrator3_DSTAT_m =
       px42LoopCtrQGC20220313_P.DiscreteTimeIntegrator3_IC_l;
 
-    // InitializeConditions for DiscreteIntegrator: '<S15>/Discrete-Time Integrator' 
+    // InitializeConditions for DiscreteIntegrator: '<S14>/Discrete-Time Integrator' 
     px42LoopCtrQGC20220313_DW.DiscreteTimeIntegrator_DSTATE =
       px42LoopCtrQGC20220313_P.DiscreteTimeIntegrator_IC_l;
 
-    // InitializeConditions for DiscreteIntegrator: '<S15>/Discrete-Time Integrator1' 
+    // InitializeConditions for DiscreteIntegrator: '<S14>/Discrete-Time Integrator1' 
     px42LoopCtrQGC20220313_DW.DiscreteTimeIntegrator1_DSTATE =
       px42LoopCtrQGC20220313_P.DiscreteTimeIntegrator1_IC;
 
-    // InitializeConditions for DiscreteIntegrator: '<S13>/Discrete-Time Integrator' 
+    // InitializeConditions for DiscreteIntegrator: '<S12>/Discrete-Time Integrator' 
     px42LoopCtrQGC20220313_DW.DiscreteTimeIntegrator_DSTATE_p =
       px42LoopCtrQGC20220313_P.DiscreteTimeIntegrator_IC_h;
 
-    // InitializeConditions for DiscreteIntegrator: '<S13>/Discrete-Time Integrator1' 
+    // InitializeConditions for DiscreteIntegrator: '<S12>/Discrete-Time Integrator1' 
     px42LoopCtrQGC20220313_DW.DiscreteTimeIntegrator1_DSTAT_i =
       px42LoopCtrQGC20220313_P.DiscreteTimeIntegrator1_IC_j;
 
-    // InitializeConditions for DiscreteIntegrator: '<S14>/Discrete-Time Integrator' 
+    // InitializeConditions for DiscreteIntegrator: '<S13>/Discrete-Time Integrator' 
     px42LoopCtrQGC20220313_DW.DiscreteTimeIntegrator_DSTATE_f =
       px42LoopCtrQGC20220313_P.DiscreteTimeIntegrator_IC_o;
 
-    // InitializeConditions for DiscreteIntegrator: '<S14>/Discrete-Time Integrator1' 
+    // InitializeConditions for DiscreteIntegrator: '<S13>/Discrete-Time Integrator1' 
     px42LoopCtrQGC20220313_DW.DiscreteTimeIntegrator1_DSTAT_g =
       px42LoopCtrQGC20220313_P.DiscreteTimeIntegrator1_IC_c;
 
     // SystemInitialize for Enabled SubSystem: '<S2>/Enabled Subsystem'
-    // SystemInitialize for SignalConversion generated from: '<S43>/In1' incorporates:
-    //   Outport: '<S43>/Out1'
+    // SystemInitialize for SignalConversion generated from: '<S42>/In1' incorporates:
+    //   Outport: '<S42>/Out1'
 
     px42LoopCtrQGC20220313_B.In1_a = px42LoopCtrQGC20220313_P.Out1_Y0_k;
 
     // End of SystemInitialize for SubSystem: '<S2>/Enabled Subsystem'
 
     // SystemInitialize for Enabled SubSystem: '<S3>/Enabled Subsystem'
-    // SystemInitialize for SignalConversion generated from: '<S44>/In1' incorporates:
-    //   Outport: '<S44>/Out1'
+    // SystemInitialize for SignalConversion generated from: '<S43>/In1' incorporates:
+    //   Outport: '<S43>/Out1'
 
     px42LoopCtrQGC20220313_B.In1 = px42LoopCtrQGC20220313_P.Out1_Y0;
 
     // End of SystemInitialize for SubSystem: '<S3>/Enabled Subsystem'
 
-    // SystemInitialize for Enabled SubSystem: '<S53>/Enabled Subsystem'
-    // SystemInitialize for SignalConversion generated from: '<S54>/In1' incorporates:
-    //   Outport: '<S54>/Out1'
-
-    px42LoopCtrQGC20220313_B.In1_k = px42LoopCtrQGC20220313_P.Out1_Y0_g;
-
-    // End of SystemInitialize for SubSystem: '<S53>/Enabled Subsystem'
-
     // SystemInitialize for Enabled SubSystem: '<Root>/Subsystem1'
-    // InitializeConditions for DiscreteIntegrator: '<S6>/Discrete-Time Integrator' 
+    // InitializeConditions for DiscreteIntegrator: '<S5>/Discrete-Time Integrator' 
     px42LoopCtrQGC20220313_DW.DiscreteTimeIntegrator_DSTAT_fj =
       px42LoopCtrQGC20220313_P.DiscreteTimeIntegrator_IC;
 
@@ -3095,15 +2979,6 @@ void px42LoopCtrQGC20220313_initialize(void)
                          &px42LoopCtrQGC20220313_DW.obj_n.eventStructObj);
     px42LoopCtrQGC20220313_DW.obj_n.isSetupComplete = true;
 
-    // Start for MATLABSystem: '<S53>/SourceBlock'
-    px42LoopCtrQGC20220313_DW.obj_a.matlabCodegenIsDeleted = false;
-    px42LoopCtrQGC20220313_DW.obj_a.isSetupComplete = false;
-    px42LoopCtrQGC20220313_DW.obj_a.isInitialized = 1;
-    px42LoopCtrQGC20220313_DW.obj_a.orbMetadataObj = ORB_ID(input_rc);
-    uORB_read_initialize(px42LoopCtrQGC20220313_DW.obj_a.orbMetadataObj,
-                         &px42LoopCtrQGC20220313_DW.obj_a.eventStructObj);
-    px42LoopCtrQGC20220313_DW.obj_a.isSetupComplete = true;
-
     // Start for MATLABSystem: '<Root>/PX4 PWM Output1' incorporates:
     //   Constant: '<Root>/Constant2'
 
@@ -3112,12 +2987,6 @@ void px42LoopCtrQGC20220313_initialize(void)
     px42LoopCtrQGC20220313_DW.obj.matlabCodegenIsDeleted = false;
     px42LoopCtrQGC_SystemCore_setup(&px42LoopCtrQGC20220313_DW.obj,
       rtb_DataStoreRead6, px42LoopCtrQGC20220313_P.Constant2_Value_kf);
-
-    // Start for MATLABSystem: '<Root>/Serial Transmit1'
-    px42LoopCtrQGC20220313_DW.obj_e.isInitialized = 0;
-    px42LoopCtrQGC20220313_DW.obj_e.SCIDriverObj.MW_SCIHANDLE = NULL;
-    px42LoopCtrQGC20220313_DW.obj_e.matlabCodegenIsDeleted = false;
-    px42LoopCtrQ_SystemCore_setup_k(&px42LoopCtrQGC20220313_DW.obj_e);
 
     // Start for MATLABSystem: '<S2>/SourceBlock'
     px42LoopCtrQGC20220313_DW.obj_l.matlabCodegenIsDeleted = false;
@@ -3150,17 +3019,6 @@ void px42LoopCtrQGC20220313_terminate(void)
 
   // End of Terminate for MATLABSystem: '<S3>/SourceBlock'
 
-  // Terminate for MATLABSystem: '<S53>/SourceBlock'
-  if (!px42LoopCtrQGC20220313_DW.obj_a.matlabCodegenIsDeleted) {
-    px42LoopCtrQGC20220313_DW.obj_a.matlabCodegenIsDeleted = true;
-    if ((px42LoopCtrQGC20220313_DW.obj_a.isInitialized == 1) &&
-        px42LoopCtrQGC20220313_DW.obj_a.isSetupComplete) {
-      uORB_read_terminate(&px42LoopCtrQGC20220313_DW.obj_a.eventStructObj);
-    }
-  }
-
-  // End of Terminate for MATLABSystem: '<S53>/SourceBlock'
-
   // Terminate for MATLABSystem: '<Root>/PX4 PWM Output1'
   if (!px42LoopCtrQGC20220313_DW.obj.matlabCodegenIsDeleted) {
     px42LoopCtrQGC20220313_DW.obj.matlabCodegenIsDeleted = true;
@@ -3187,17 +3045,6 @@ void px42LoopCtrQGC20220313_terminate(void)
   }
 
   // End of Terminate for MATLABSystem: '<Root>/PX4 PWM Output1'
-
-  // Terminate for MATLABSystem: '<Root>/Serial Transmit1'
-  if (!px42LoopCtrQGC20220313_DW.obj_e.matlabCodegenIsDeleted) {
-    px42LoopCtrQGC20220313_DW.obj_e.matlabCodegenIsDeleted = true;
-    if ((px42LoopCtrQGC20220313_DW.obj_e.isInitialized == 1) &&
-        px42LoopCtrQGC20220313_DW.obj_e.isSetupComplete) {
-      MW_SCI_Close(px42LoopCtrQGC20220313_DW.obj_e.SCIDriverObj.MW_SCIHANDLE);
-    }
-  }
-
-  // End of Terminate for MATLABSystem: '<Root>/Serial Transmit1'
 
   // Terminate for MATLABSystem: '<S2>/SourceBlock'
   if (!px42LoopCtrQGC20220313_DW.obj_l.matlabCodegenIsDeleted) {

@@ -7,9 +7,9 @@
 //
 //  Code generation for model "px4_noGPS1".
 //
-//  Model version              : 5.149
+//  Model version              : 5.150
 //  Simulink Coder version : 9.7 (R2022a) 13-Nov-2021
-//  C++ source code generated on : Sun Mar 20 13:02:07 2022
+//  C++ source code generated on : Wed Mar 23 21:15:16 2022
 //
 //  Target selection: ert.tlc
 //  Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -96,13 +96,13 @@ static DataTypeTransition rtBTransitions[] = {
 
   { (char_T *)(&px4_noGPS1_DW.obj_n), 20, 0, 2 },
 
-  { (char_T *)(&px4_noGPS1_DW.UD_DSTATE), 0, 0, 48 },
+  { (char_T *)(&px4_noGPS1_DW.UD_DSTATE), 0, 0, 41 },
 
   { (char_T *)(&px4_noGPS1_DW.Scope_PWORK.LoggedData), 11, 0, 17 },
 
   { (char_T *)(&px4_noGPS1_DW.Subsystem1_SubsysRanBC), 2, 0, 9 },
 
-  { (char_T *)(&px4_noGPS1_DW.attitude_flag), 8, 0, 3 }
+  { (char_T *)(&px4_noGPS1_DW.attitude_flag), 8, 0, 2 }
 };
 
 // data type transition table for block I/O structure
@@ -113,7 +113,7 @@ static DataTypeTransitionTable rtBTransTable = {
 
 // data type transitions for Parameters structure
 static DataTypeTransition rtPTransitions[] = {
-  { (char_T *)(&px4_noGPS1_P.DiscreteDerivative1_ICPrevScale), 0, 0, 14 },
+  { (char_T *)(&px4_noGPS1_P.DiscreteDerivative1_ICPrevScale), 0, 0, 12 },
 
   { (char_T *)(&px4_noGPS1_P.Out1_Y0), 18, 0, 1 },
 
@@ -123,7 +123,7 @@ static DataTypeTransition rtPTransitions[] = {
 
   { (char_T *)(&px4_noGPS1_P.Constant_Value_c), 17, 0, 1 },
 
-  { (char_T *)(&px4_noGPS1_P.Constant1_Value), 0, 0, 339 },
+  { (char_T *)(&px4_noGPS1_P.Constant1_Value), 0, 0, 293 },
 
   { (char_T *)(&px4_noGPS1_P.Reset_Value), 8, 0, 9 },
 
